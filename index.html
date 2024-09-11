@@ -4,12 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>John Doe - Embedded Systems Engineer</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.12.12/babel.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+
     <style>
         /* ... (previous styles remain the same) ... */
         .fade-enter { opacity: 0; }
@@ -23,7 +18,107 @@
 
     <script type="text/babel">
         const { useState, useEffect, useRef, useContext, createContext, lazy, Suspense } = React;
+import React, { useState, useEffect, useContext, createContext, lazy, Suspense } from 'react';
+import { createRoot } from 'react-dom/client';
 
+// Theme Context
+const ThemeContext = createContext();
+
+const ThemeProvider = ({ children }) => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const toggleTheme = () => setIsDarkMode(!isDarkMode);
+  return (
+    <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+// Lazy-loaded components
+const LazyHero = lazy(() => import('./components/Hero'));
+const LazySkills = lazy(() => import('./components/Skills'));
+const LazyProjects = lazy(() => import('./components/Projects'));
+const LazyExperience = lazy(() => import('./components/Experience'));
+const LazyContact = lazy(() => import('./components/Contact'));
+
+// Header Component
+const Header = ({ setCurrentSection }) => {
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+  return (
+    <header className={`fixed w-full z-50 ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} shadow-lg transition-colors duration-300`}>
+      <nav className="container mx-auto px-6 py-3">
+        <div className="flex justify-between items-center">
+          <div className="text-xl font-bold">John Doe</div>
+          <div className="flex items-center space-x-4">
+            {['Home', 'Skills', 'Projects', 'Experience', 'Contact'].map((item) => (
+              <button 
+                key={item}
+                onClick={() => setCurrentSection(item.toLowerCase())}
+                className={`hover:text-blue-400 transition duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
+              >
+                {item}
+              </button>
+            ))}
+            <button onClick={toggleTheme} className="p-2 rounded-full bg-gray-200 dark:bg-gray-600">
+              {isDarkMode ? '🌞' : '🌙'}
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
+  );
+};
+
+// Footer Component
+const Footer = () => {
+  const { isDarkMode } = useContext(ThemeContext);
+  return (
+    <footer className={`py-6 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-900'}`}>
+      <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+        <div className="mb-4 md:mb-0">
+          <p>&copy; 2024 John Doe. All rights reserved.</p>
+        </div>
+        <div className="flex space-x-4">
+          <a href="#" className="hover:text-blue-400 transition duration-300">LinkedIn</a>
+          <a href="#" className="hover:text-blue-400 transition duration-300">GitHub</a>
+          <a href="#" className="hover:text-blue-400 transition duration-300">Twitter</a>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+// Main App Component
+const App = () => {
+  const [currentSection, setCurrentSection] = useState('home');
+  const { isDarkMode } = useContext(ThemeContext);
+
+  return (
+    <div className={`min-h-screen ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
+      <Header setCurrentSection={setCurrentSection} />
+      <main>
+        <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
+          {currentSection === 'home' && <LazyHero />}
+          {currentSection === 'skills' && <LazySkills />}
+          {currentSection === 'projects' && <LazyProjects />}
+          {currentSection === 'experience' && <LazyExperience />}
+          {currentSection === 'contact' && <LazyContact />}
+        </Suspense>
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+// Render the app
+const root = createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  </React.StrictMode>
+);
         // Theme Context
         const ThemeContext = createContext();
         const ThemeProvider = ({ children }) => {
