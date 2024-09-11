@@ -6,55 +6,64 @@
     <title>John Doe - Embedded Systems Engineer</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.12.12/babel.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <style>
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-        .gradient-bg {
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-        }
-        .text-shadow {
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
+        /* ... (previous styles remain the same) ... */
+        .fade-enter { opacity: 0; }
+        .fade-enter-active { opacity: 1; transition: opacity 300ms ease-in; }
+        .fade-exit { opacity: 1; }
+        .fade-exit-active { opacity: 0; transition: opacity 300ms ease-in; }
     </style>
 </head>
 <body class="bg-gray-100">
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect, useRef } = React;
+        const { useState, useEffect, useRef, useContext, createContext, lazy, Suspense } = React;
+
+        // Theme Context
+        const ThemeContext = createContext();
+        const ThemeProvider = ({ children }) => {
+            const [isDarkMode, setIsDarkMode] = useState(false);
+            const toggleTheme = () => setIsDarkMode(!isDarkMode);
+            return (
+                <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
+                    {children}
+                </ThemeContext.Provider>
+            );
+        };
+
+        // Lazy-loaded components
+        const LazyHero = lazy(() => new Promise(resolve => setTimeout(() => resolve({ default: Hero }), 1000)));
+        const LazySkills = lazy(() => new Promise(resolve => setTimeout(() => resolve({ default: Skills }), 1000)));
+        const LazyProjects = lazy(() => new Promise(resolve => setTimeout(() => resolve({ default: Projects }), 1000)));
+        const LazyExperience = lazy(() => new Promise(resolve => setTimeout(() => resolve({ default: Experience }), 1000)));
+        const LazyContact = lazy(() => new Promise(resolve => setTimeout(() => resolve({ default: Contact }), 1000)));
 
         // Header Component
         const Header = ({ setCurrentSection }) => {
+            const { isDarkMode, toggleTheme } = useContext(ThemeContext);
             return (
-                <header className="fixed w-full z-50 bg-gray-900 text-white shadow-lg">
+                <header className={`fixed w-full z-50 ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} shadow-lg transition-colors duration-300`}>
                     <nav className="container mx-auto px-6 py-3">
                         <div className="flex justify-between items-center">
                             <div className="text-xl font-bold">John Doe</div>
-                            <div className="hidden md:flex space-x-4">
+                            <div className="flex items-center space-x-4">
                                 {['Home', 'Skills', 'Projects', 'Experience', 'Contact'].map((item) => (
                                     <button 
                                         key={item}
                                         onClick={() => setCurrentSection(item.toLowerCase())}
-                                        className="hover:text-blue-400 transition duration-300"
+                                        className={`hover:text-blue-400 transition duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
                                     >
                                         {item}
                                     </button>
                                 ))}
+                                <button onClick={toggleTheme} className="p-2 rounded-full bg-gray-200 dark:bg-gray-600">
+                                    {isDarkMode ? '🌞' : '🌙'}
+                                </button>
                             </div>
                         </div>
                     </nav>
@@ -64,6 +73,7 @@
 
         // Hero Component
         const Hero = () => {
+            const { isDarkMode } = useContext(ThemeContext);
             useEffect(() => {
                 const tl = gsap.timeline();
                 tl.from(".hero-title", { opacity: 0, y: 50, duration: 1 })
@@ -72,8 +82,8 @@
             }, []);
 
             return (
-                <section className="h-screen flex items-center justify-center gradient-bg">
-                    <div className="text-center text-white">
+                <section className={`h-screen flex items-center justify-center ${isDarkMode ? 'bg-gray-900 text-white' : 'gradient-bg text-white'}`}>
+                    <div className="text-center">
                         <h1 className="hero-title text-5xl md:text-6xl font-bold mb-4 text-shadow">John Doe</h1>
                         <p className="hero-subtitle text-2xl md:text-3xl mb-8 text-shadow">Embedded Systems Engineer</p>
                         <button className="hero-cta bg-white text-gray-900 px-6 py-3 rounded-full font-bold hover:bg-gray-200 transition duration-300">
@@ -86,6 +96,7 @@
 
         // Skills Component
         const Skills = () => {
+            const { isDarkMode } = useContext(ThemeContext);
             const skills = [
                 { name: "Microcontroller Programming", icon: "🎛️" },
                 { name: "Embedded C/C++", icon: "💻" },
@@ -96,15 +107,15 @@
             ];
 
             return (
-                <section className="py-20 bg-white">
+                <section className={`py-20 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}`}>
                     <div className="container mx-auto px-6">
                         <h2 className="text-3xl font-bold text-center mb-8">Skills & Expertise</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {skills.map((skill, index) => (
-                                <div key={index} className="bg-gray-100 rounded-lg p-6 shadow-md hover:shadow-lg transition duration-300">
+                                <div key={index} className={`${isDarkMode ? 'bg-gray-700' : 'bg-gray-100'} rounded-lg p-6 shadow-md hover:shadow-lg transition duration-300`}>
                                     <div className="text-4xl mb-4">{skill.icon}</div>
                                     <h3 className="text-xl font-semibold mb-2">{skill.name}</h3>
-                                    <p className="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    <p className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                 </div>
                             ))}
                         </div>
@@ -115,6 +126,7 @@
 
         // Projects Component
         const Projects = () => {
+            const { isDarkMode } = useContext(ThemeContext);
             const projects = [
                 { title: "Smart Home Hub", description: "Centralized IoT controller for home automation", image: "/api/placeholder/400/200" },
                 { title: "Autonomous Drone", description: "Self-navigating drone with obstacle avoidance", image: "/api/placeholder/400/200" },
@@ -122,16 +134,16 @@
             ];
 
             return (
-                <section className="py-20 bg-gray-100">
+                <section className={`py-20 ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
                     <div className="container mx-auto px-6">
                         <h2 className="text-3xl font-bold text-center mb-8">Featured Projects</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {projects.map((project, index) => (
-                                <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                                <div key={index} className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'} rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300`}>
                                     <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
                                     <div className="p-6">
                                         <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                                        <p className="text-gray-600 mb-4">{project.description}</p>
+                                        <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} mb-4`}>{project.description}</p>
                                         <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300">
                                             Learn More
                                         </button>
@@ -146,6 +158,7 @@
 
         // Experience Component
         const Experience = () => {
+            const { isDarkMode } = useContext(ThemeContext);
             const experiences = [
                 { 
                     title: "Senior Embedded Systems Engineer",
@@ -168,7 +181,7 @@
             ];
 
             return (
-                <section className="py-20 bg-white">
+                <section className={`py-20 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}`}>
                     <div className="container mx-auto px-6">
                         <h2 className="text-3xl font-bold text-center mb-8">Professional Experience</h2>
                         <div className="space-y-12">
@@ -176,11 +189,11 @@
                                 <div key={index} className="flex flex-col md:flex-row">
                                     <div className="md:w-1/4">
                                         <h3 className="text-xl font-semibold">{exp.title}</h3>
-                                        <p className="text-gray-600">{exp.company}</p>
-                                        <p className="text-gray-500">{exp.period}</p>
+                                        <p className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>{exp.company}</p>
+                                        <p className={isDarkMode ? 'text-gray-400' : 'text-gray-500'}>{exp.period}</p>
                                     </div>
                                     <div className="md:w-3/4 mt-4 md:mt-0">
-                                        <p className="text-gray-700">{exp.description}</p>
+                                        <p className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>{exp.description}</p>
                                     </div>
                                 </div>
                             ))}
@@ -192,6 +205,7 @@
 
         // Contact Component
         const Contact = () => {
+            const { isDarkMode } = useContext(ThemeContext);
             const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
             const handleChange = (e) => {
@@ -206,126 +220,103 @@
             };
 
             return (
-                <section className="py-20 bg-gray-100">
+                <section className={`py-20 ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
                     <div className="container mx-auto px-6">
                         <h2 className="text-3xl font-bold text-center mb-8">Get in Touch</h2>
                         <form onSubmit={handleSubmit} className="max-w-lg mx-auto">
                             <div className="mb-4">
-                                <label htmlFor="name" className="block text-gray-700 font-bold mb-2">Name</label>
+                                <label htmlFor="name" className="block font-bold mb-2">Name</label>
                                 <input
                                     type="text"
                                     id="name"
                                     name="name"
                                     value={formData.name}
                                     onChange={handleChange}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    className={`w-full px-3 py-2 border ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                                     required
                                 />
                             </div>
                             <div className="mb-4">
-                                <label htmlFor="email" className="block text-gray-700 font-bold mb-2">Email</label>
+                                <label htmlFor="email" className="block font-bold mb-2">Email</label>
                                 <input
                                     type="email"
                                     id="email"
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    className={`w-full px-3 py-2 border ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                                     required
                                 />
                             </div>
                             <div className="mb-4">
-                                <label htmlFor="message" className="block text-gray-700 font-bold mb-2">Message</label>
+                                <label htmlFor="message" className="block font-bold mb-2">Message</label>
                                 <textarea
                                     id="message"
                                     name="message"
                                     value={formData.message}
                                     onChange={handleChange}
                                     rows="4"
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    required
-                                ></textarea>
-                            </div>
-                            <button type="submit" className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300">
-                                Send Message
-                            </button>
-                        </form>
-                    </div>
-                </section>
-            );
-        };
+                                    className={`w-full px-3 py-2 border ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                    required
+                ></textarea>
+            </div>
+            <button
+                type="submit"
+                className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
+            >
+                Send Message
+            </button>
+        </form>
+    </div>
+</section>
+);
+};
 
-        // CircuitBackground Component
-        const CircuitBackground = () => {
-            const canvasRef = useRef(null);
+// Footer Component
+const Footer = () => {
+    const { isDarkMode } = useContext(ThemeContext);
+    return (
+        <footer className={`py-6 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-900'}`}>
+            <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+                <div className="mb-4 md:mb-0">
+                    <p>&copy; 2024 John Doe. All rights reserved.</p>
+                </div>
+                <div className="flex space-x-4">
+                    <a href="#" className="hover:text-blue-400 transition duration-300">LinkedIn</a>
+                    <a href="#" className="hover:text-blue-400 transition duration-300">GitHub</a>
+                    <a href="#" className="hover:text-blue-400 transition duration-300">Twitter</a>
+                </div>
+            </div>
+        </footer>
+    );
+};
 
-            useEffect(() => {
-                const scene = new THREE.Scene();
-                const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-                const renderer = new THREE.WebGLRenderer({ canvas: canvasRef.current, alpha: true });
-                renderer.setSize(window.innerWidth, window.innerHeight);
+// Main App Component
+const App = () => {
+    const [currentSection, setCurrentSection] = useState('home');
+    const { isDarkMode } = useContext(ThemeContext);
 
-                const geometry = new THREE.BufferGeometry();
-                const vertices = [];
-                for (let i = 0; i < 10000; i++) {
-                    vertices.push(THREE.MathUtils.randFloatSpread(2000));
-                    vertices.push(THREE.MathUtils.randFloatSpread(2000));
-                    vertices.push(THREE.MathUtils.randFloatSpread(2000));
-                }
-                geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+    return (
+        <div className={`min-h-screen ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
+            <Header setCurrentSection={setCurrentSection} />
+            <main>
+                <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
+                    {currentSection === 'home' && <LazyHero />}
+                    {currentSection === 'skills' && <LazySkills />}
+                    {currentSection === 'projects' && <LazyProjects />}
+                    {currentSection === 'experience' && <LazyExperience />}
+                    {currentSection === 'contact' && <LazyContact />}
+                </Suspense>
+            </main>
+            <Footer />
+        </div>
+    );
+};
 
-                const particles = new THREE.Points(
-                    geometry,
-                    new THREE.PointsMaterial({ color: 0x888888, size: 3 })
-                );
-                scene.add(particles);
-
-                camera.position.z = 1000;
-
-                function animate() {
-                    requestAnimationFrame(animate);
-                    particles.rotation.x += 0.0005;
-                    particles.rotation.y += 0.0005;
-                    renderer.render(scene, camera);
-                }
-                animate();
-
-                const handleResize = () => {
-                    camera.aspect = window.innerWidth / window.innerHeight;
-                    camera.updateProjectionMatrix();
-                    renderer.setSize(window.innerWidth, window.innerHeight);
-                };
-
-                window.addEventListener('resize', handleResize);
-
-                return () => {
-                    window.removeEventListener('resize', handleResize);
-                };
-            }, []);
-
-            return <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full -z-10" />;
-        };
-
-        // Main App Component
-        const App = () => {
-            const [currentSection, setCurrentSection] = useState('home');
-
-            return (
-                <>
-                    <CircuitBackground />
-                    <Header setCurrentSection={setCurrentSection} />
-                    {currentSection === 'home' && <Hero />}
-                    {currentSection === 'skills' && <Skills />}
-                    {currentSection === 'projects' && <Projects />}
-                    {currentSection === 'experience' && <Experience />}
-                  
-                        {currentSection === 'contact' && <Contact />}
-                </>
-            );
-        };
-
-        // Render the app
-        ReactDOM.render(<App />, document.getElementById('root'));
-    </script>
-</body>
-</html>
+// Render the app
+ReactDOM.render(
+    <ThemeProvider>
+        <App />
+    </ThemeProvider>,
+    document.getElementById('root')
+);
