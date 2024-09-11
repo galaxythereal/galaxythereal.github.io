@@ -1,3 +1,9 @@
+const { useState, useEffect, useRef, Suspense } = React;
+const { Canvas, useFrame, useLoader, useThree } = ReactThreeFiber;
+const { OrbitControls, Text, Html, useProgress } = drei;
+const { motion, useAnimation, useInView } = framerMotion;
+
+// Keep your utility functions and custom hooks as they are
 import React, { useState, useEffect, useRef, Suspense } from 'react';
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
 import { OrbitControls, Text, Html, useProgress } from '@react-three/drei';
@@ -782,7 +788,6 @@ const ScrollToTopButton = () => {
   );
 };
 
-// Wrap the entire app with necessary providers
 const AppWrapper = () => {
   return (
     <React.StrictMode>
@@ -792,4 +797,4 @@ const AppWrapper = () => {
   );
 };
 
-export default AppWrapper;
+ReactDOM.render(<AppWrapper />, document.getElementById('root'));
