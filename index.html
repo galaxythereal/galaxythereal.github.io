@@ -3,415 +3,1061 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>John Doe - Embedded Systems Engineer</title>
-
+    <title>John Doe - Pioneering Embedded Systems Engineer</title>
     <style>
-        /* ... (previous styles remain the same) ... */
-        .fade-enter { opacity: 0; }
-        .fade-enter-active { opacity: 1; transition: opacity 300ms ease-in; }
-        .fade-exit { opacity: 1; }
-        .fade-exit-active { opacity: 0; transition: opacity 300ms ease-in; }
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap');
+
+        :root {
+            --primary-color: #00ffd9;
+            --secondary-color: #ff00a6;
+            --tertiary-color: #7700ff;
+            --bg-color: #000814;
+            --text-color: #ffffff;
+            --accent-color: #ffd60a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto Mono', monospace;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            transition: 0.1s;
+            z-index: 9999;
+        }
+
+        .cursor2 {
+            width: 10px;
+            height: 10px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            transition: 0.15s;
+            z-index: 9999;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            fill: var(--primary-color);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px rgba(0, 255, 217, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg 90deg,
+                var(--secondary-color) 90deg 180deg,
+                transparent 180deg 270deg,
+                var(--tertiary-color) 270deg 360deg
+            );
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            animation: rotate 4s linear infinite;
+        }
+
+        .cta-button:hover::before {
+            opacity: 1;
+        }
+
+        .cta-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #001f3f, #000814);
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* About Section */
+        #about {
+            padding: 8rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .about-text {
+            flex: 1;
+            padding-right: 4rem;
+        }
+
+        .section-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background-color: var(--secondary-color);
+        }
+
+        .about-description {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .tech-item {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            transform: translateY(-3px);
+        }
+
+        .about-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 255, 217, 0.2);
+        }
+
+        .experience-box {
+            position: absolute;
+            bottom: -30px;
+            right: 30px;
+            background-color: var(--tertiary-color);
+            color: var(--text-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(119, 0, 255, 0.3);
+        }
+
+        .experience-number {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .experience-text {
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        /* Skills Section */
+        #skills {
+            padding: 8rem 0;
+            background-color: #000d1a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg 90deg,
+                var(--primary-color) 90deg 180deg,
+                transparent 180deg 270deg,
+                var(--secondary-color) 270deg 360deg
+            );
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            animation: rotate 4s linear infinite;
+        }
+
+        .skill-card:hover::before {
+            opacity: 1;
+        }
+
+        .skill-card-content {
+            position: relative;
+            z-index: 1;
+            background-color: #000d1a;
+            border-radius: 8px;
+            padding: 1.5rem;
+            height: 100%;
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .skill-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .skill-description {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Projects Section */
+        #projects {
+            padding: 8rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 255, 217, 0.2);
+        }
+
+        .project-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            border: 2px solid var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .project-description {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .project-tag {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--secondary-color);
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* Contact Section */
+        #contact {
+            padding: 8rem 0;
+            background-color: #000d1a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .contact-info {
+            flex: 1;
+            padding-right: 4rem;
+        }
+
+        .contact-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contact-links li {
+            margin-bottom: 1rem;
+        }
+
+        .contact-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+
+        .contact-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .contact-links i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .contact-form {
+            flex: 1;
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            font-family: 'Roboto Mono', monospace;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary-color);
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 0, 166, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #000814;
+            color: var(--text-color);
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--bg-color);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+
+            .about-content,
+            .contact-content {
+                flex-direction: column;
+            }
+
+            .about-text,
+            .about-image,
+            .contact-info,
+            .contact-form {
+                flex: 1;
+                width: 100%;
+                padding: 0;
+                margin-bottom: 2rem;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+        }
     </style>
 </head>
-<body class="bg-gray-100">
-    <div id="root"></div>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor2"></div>
 
-    <script type="text/babel">
-        const { useState, useEffect, useRef, useContext, createContext, lazy, Suspense } = React;
-import React, { useState, useEffect, useContext, createContext, lazy, Suspense } from 'react';
-import { createRoot } from 'react-dom/client';
-
-// Theme Context
-const ThemeContext = createContext();
-
-const ThemeProvider = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const toggleTheme = () => setIsDarkMode(!isDarkMode);
-  return (
-    <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
-};
-
-// Lazy-loaded components
-const LazyHero = lazy(() => import('./components/Hero'));
-const LazySkills = lazy(() => import('./components/Skills'));
-const LazyProjects = lazy(() => import('./components/Projects'));
-const LazyExperience = lazy(() => import('./components/Experience'));
-const LazyContact = lazy(() => import('./components/Contact'));
-
-// Header Component
-const Header = ({ setCurrentSection }) => {
-  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
-  return (
-    <header className={`fixed w-full z-50 ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} shadow-lg transition-colors duration-300`}>
-      <nav className="container mx-auto px-6 py-3">
-        <div className="flex justify-between items-center">
-          <div className="text-xl font-bold">John Doe</div>
-          <div className="flex items-center space-x-4">
-            {['Home', 'Skills', 'Projects', 'Experience', 'Contact'].map((item) => (
-              <button 
-                key={item}
-                onClick={() => setCurrentSection(item.toLowerCase())}
-                className={`hover:text-blue-400 transition duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
-              >
-                {item}
-              </button>
-            ))}
-            <button onClick={toggleTheme} className="p-2 rounded-full bg-gray-200 dark:bg-gray-600">
-              {isDarkMode ? '🌞' : '🌙'}
-            </button>
-          </div>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z"></path>
+                        <path d="M9.293 6.293 5.586 10l3.707 3.707 1.414-1.414L8.414 10l2.293-2.293zm5.414 0-1.414 1.414L15.586 10l-2.293 2.293 1.414 1.414L18.414 10z"></path>
+                    </svg>
+                    John Doe
+                </a>
+                <button class="nav-toggle" aria-label="toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-      </nav>
     </header>
-  );
-};
 
-// Footer Component
-const Footer = () => {
-  const { isDarkMode } = useContext(ThemeContext);
-  return (
-    <footer className={`py-6 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-900'}`}>
-      <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
-        <div className="mb-4 md:mb-0">
-          <p>&copy; 2024 John Doe. All rights reserved.</p>
+    <main>
+        <section id="hero">
+            <div class="hero-background"></div>
+            <canvas class="particles"></canvas>
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">John Doe</h1>
+                    <p class="hero-subtitle">Pioneering Embedded Systems Engineer</p>
+                    <a href="#contact" class="cta-button"><span>Get in Touch</span></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2 class="section-title">About Me</h2>
+                        <p class="about-description">I'm a passionate Embedded Systems Engineer with over a decade of experience in developing cutting-edge solutions. My expertise lies in creating efficient, reliable, and innovative embedded systems that push the boundaries of what's possible in IoT, robotics, and autonomous systems.</p>
+                        <p class="about-description">With a strong foundation in both hardware and software, I bridge the gap between complex system requirements and elegant engineering solutions. My goal is to drive the future of technology through embedded systems that are not just functional, but transformative.</p>
+                        <div class="tech-stack">
+                            <span class="tech-item">C/C++</span>
+                            <span class="tech-item">Python</span>
+                            <span class="tech-item">RTOS</span>
+                            <span class="tech-item">ARM</span>
+                            <span class="tech-item">FPGA</span>
+                            <span class="tech-item">IoT</span>
+                        </div>
+                    </div>
+                    <div class="about-image">
+                        <img src="/api/placeholder/500/500" alt="John Doe">
+                        <div class="experience-box">
+                            <div class="experience-number">10+</div>
+                            <div class="experience-text">Years of Experience</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="container">
+                <h2 class="section-title">Skills & Expertise</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-card-content">
+                            <div class="skill-icon">💻</div>
+                            <h3 class="skill-title">Embedded C/C++</h3>
+                            <p class="skill-description">Mastery in writing efficient, optimized code for microcontrollers and embedded systems.</p>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-card-content">
+                            <div class="skill-icon">⚙️</div>
+                            <h3 class="skill-title">RTOS & Bare-metal</h3>
+                            <p class="skill-description">Proficient in both RTOS-based and bare-metal firmware development for real-time applications.</p>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-card-content">
+                            <div class="skill-icon">📡</div>
+                            <h3 class="skill-title">IoT & Connectivity</h3>
+                            <p class="skill-description">Experienced in implementing various IoT protocols and wireless technologies (BLE, WiFi, LoRa).</p>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-card-content">
+                            <div class="skill-icon">🔌</div>
+                            <h3 class="skill-title">PCB Design</h3>
+                            <p class="skill-description">Skilled in designing and prototyping PCBs for embedded systems and IoT devices.</p>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-card-content">
+                            <div class="skill-icon">🤖</div>
+                            <h3 class="skill-title">Robotics & Control Systems</h3>
+                            <p class="skill-description">Proficient in developing control systems for robotics and autonomous applications.</p>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-card-content">
+                            <div class="skill-icon">🔍</div>
+                            <h3 class="skill-title">Debug & Optimization</h3>
+                            <p class="skill-description">Expert in using advanced debugging tools and techniques to optimize system performance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-image" style="background-image: url('/api/placeholder/300/200');"></div>
+                        <div class="project-overlay">
+                            <a href="#" class="project-link">View Project</a>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Autonomous Drone Controller</h3>
+                            <p class="project-description">Developed a high-performance flight controller for autonomous drones using advanced sensor fusion algorithms.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">C++</span>
+                                <span class="project-tag">RTOS</span>
+                                <span class="project-tag">Sensor Fusion</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image" style="background-image: url('/api/placeholder/300/200');"></div>
+                        <div class="project-overlay">
+                            <a href="#" class="project-link">View Project</a>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Smart Energy Management System</h3>
+                            <p class="project-description">Created an IoT-based energy monitoring and management system for smart homes and industrial applications.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">IoT</span>
+                                <span class="project-tag">MQTT</span>
+                                <span class="project-tag">Machine Learning</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image" style="background-image: url('/api/placeholder/300/200');"></div>
+                        <div class="project-overlay">
+                            <a href="#" class="project-link">View Project</a>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Wearable Health Monitor</h3>
+                            <p class="project-description">Engineered a low-power wearable device for real-time health monitoring with seamless cloud integration.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">ARM Cortex-M</span>
+                                <span class="project-tag">BLE</span>
+                                <span class="project-tag">Cloud Integration</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2 class="section-title">Get in Touch</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <p>I'm always open to new opportunities and collaborations. Feel free to reach out if you have any questions or just want to connect!</p>
+                        <ul class="contact-links">
+                            <li><a href="mailto:john.doe@example.com"><i class="fas fa-envelope"></i> john.doe@example.com</a></li>
+                            <li><a href="tel:+1234567890"><i class="fas fa-phone"></i> +1 (234) 567-890</a></li>
+                            <li><a href="#"><i class="fas fa-map-marker-alt"></i> San Francisco, CA</a></li>
+                        </ul>
+                    </div>
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">John Doe</div>
+                <div class="social-links">
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <p>&copy; 2024 John Doe. All rights reserved.</p>
         </div>
-        <div className="flex space-x-4">
-          <a href="#" className="hover:text-blue-400 transition duration-300">LinkedIn</a>
-          <a href="#" className="hover:text-blue-400 transition duration-300">GitHub</a>
-          <a href="#" className="hover:text-blue-400 transition duration-300">Twitter</a>
-        </div>
-      </div>
     </footer>
-  );
-};
 
-// Main App Component
-const App = () => {
-  const [currentSection, setCurrentSection] = useState('home');
-  const { isDarkMode } = useContext(ThemeContext);
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script>
+        // Custom cursor
+        const cursor = document.querySelector('.cursor');
+        const cursor2 = document.querySelector('.cursor2');
 
-  return (
-    <div className={`min-h-screen ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
-      <Header setCurrentSection={setCurrentSection} />
-      <main>
-        <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
-          {currentSection === 'home' && <LazyHero />}
-          {currentSection === 'skills' && <LazySkills />}
-          {currentSection === 'projects' && <LazyProjects />}
-          {currentSection === 'experience' && <LazyExperience />}
-          {currentSection === 'contact' && <LazyContact />}
-        </Suspense>
-      </main>
-      <Footer />
-    </div>
-  );
-};
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.cssText = cursor2.style.cssText = `left: ${e.clientX}px; top: ${e.clientY}px;`;
+        });
 
-// Render the app
-const root = createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
-  </React.StrictMode>
-);
-        // Theme Context
-        const ThemeContext = createContext();
-        const ThemeProvider = ({ children }) => {
-            const [isDarkMode, setIsDarkMode] = useState(false);
-            const toggleTheme = () => setIsDarkMode(!isDarkMode);
-            return (
-                <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
-                    {children}
-                </ThemeContext.Provider>
-            );
-        };
+        // Particle background
+        const canvas = document.querySelector('.particles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-        // Lazy-loaded components
-        const LazyHero = lazy(() => new Promise(resolve => setTimeout(() => resolve({ default: Hero }), 1000)));
-        const LazySkills = lazy(() => new Promise(resolve => setTimeout(() => resolve({ default: Skills }), 1000)));
-        const LazyProjects = lazy(() => new Promise(resolve => setTimeout(() => resolve({ default: Projects }), 1000)));
-        const LazyExperience = lazy(() => new Promise(resolve => setTimeout(() => resolve({ default: Experience }), 1000)));
-        const LazyContact = lazy(() => new Promise(resolve => setTimeout(() => resolve({ default: Contact }), 1000)));
+        let particlesArray;
 
-        // Header Component
-        const Header = ({ setCurrentSection }) => {
-            const { isDarkMode, toggleTheme } = useContext(ThemeContext);
-            return (
-                <header className={`fixed w-full z-50 ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} shadow-lg transition-colors duration-300`}>
-                    <nav className="container mx-auto px-6 py-3">
-                        <div className="flex justify-between items-center">
-                            <div className="text-xl font-bold">John Doe</div>
-                            <div className="flex items-center space-x-4">
-                                {['Home', 'Skills', 'Projects', 'Experience', 'Contact'].map((item) => (
-                                    <button 
-                                        key={item}
-                                        onClick={() => setCurrentSection(item.toLowerCase())}
-                                        className={`hover:text-blue-400 transition duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
-                                    >
-                                        {item}
-                                    </button>
-                                ))}
-                                <button onClick={toggleTheme} className="p-2 rounded-full bg-gray-200 dark:bg-gray-600">
-                                    {isDarkMode ? '🌞' : '🌙'}
-                                </button>
-                            </div>
-                        </div>
-                    </nav>
-                </header>
-            );
-        };
+        // Particle class
+        class Particle {
+            constructor(x, y, size, color, weight) {
+                this.x = x;
+                this.y = y;
+                this.size = size;
+                this.color = color;
+                this.weight = weight;
+            }
 
-        // Hero Component
-        const Hero = () => {
-            const { isDarkMode } = useContext(ThemeContext);
-            useEffect(() => {
-                const tl = gsap.timeline();
-                tl.from(".hero-title", { opacity: 0, y: 50, duration: 1 })
-                  .from(".hero-subtitle", { opacity: 0, y: 50, duration: 1 }, "-=0.5")
-                  .from(".hero-cta", { opacity: 0, y: 50, duration: 1 }, "-=0.5");
-            }, []);
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
 
-            return (
-                <section className={`h-screen flex items-center justify-center ${isDarkMode ? 'bg-gray-900 text-white' : 'gradient-bg text-white'}`}>
-                    <div className="text-center">
-                        <h1 className="hero-title text-5xl md:text-6xl font-bold mb-4 text-shadow">John Doe</h1>
-                        <p className="hero-subtitle text-2xl md:text-3xl mb-8 text-shadow">Embedded Systems Engineer</p>
-                        <button className="hero-cta bg-white text-gray-900 px-6 py-3 rounded-full font-bold hover:bg-gray-200 transition duration-300">
-                            Explore My Work
-                        </button>
-                    </div>
-                </section>
-            );
-        };
-
-        // Skills Component
-        const Skills = () => {
-            const { isDarkMode } = useContext(ThemeContext);
-            const skills = [
-                { name: "Microcontroller Programming", icon: "🎛️" },
-                { name: "Embedded C/C++", icon: "💻" },
-                { name: "RTOS", icon: "⏱️" },
-                { name: "IoT Protocols", icon: "📡" },
-                { name: "PCB Design", icon: "📊" },
-                { name: "Firmware Optimization", icon: "⚡" },
-            ];
-
-            return (
-                <section className={`py-20 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}`}>
-                    <div className="container mx-auto px-6">
-                        <h2 className="text-3xl font-bold text-center mb-8">Skills & Expertise</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {skills.map((skill, index) => (
-                                <div key={index} className={`${isDarkMode ? 'bg-gray-700' : 'bg-gray-100'} rounded-lg p-6 shadow-md hover:shadow-lg transition duration-300`}>
-                                    <div className="text-4xl mb-4">{skill.icon}</div>
-                                    <h3 className="text-xl font-semibold mb-2">{skill.name}</h3>
-                                    <p className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-            );
-        };
-
-        // Projects Component
-        const Projects = () => {
-            const { isDarkMode } = useContext(ThemeContext);
-            const projects = [
-                { title: "Smart Home Hub", description: "Centralized IoT controller for home automation", image: "/api/placeholder/400/200" },
-                { title: "Autonomous Drone", description: "Self-navigating drone with obstacle avoidance", image: "/api/placeholder/400/200" },
-                { title: "Industrial Sensor Network", description: "Scalable IoT solution for factory monitoring", image: "/api/placeholder/400/200" },
-            ];
-
-            return (
-                <section className={`py-20 ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
-                    <div className="container mx-auto px-6">
-                        <h2 className="text-3xl font-bold text-center mb-8">Featured Projects</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {projects.map((project, index) => (
-                                <div key={index} className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'} rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300`}>
-                                    <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
-                                    <div className="p-6">
-                                        <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                                        <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} mb-4`}>{project.description}</p>
-                                        <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300">
-                                            Learn More
-                                        </button>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-            );
-        };
-
-        // Experience Component
-        const Experience = () => {
-            const { isDarkMode } = useContext(ThemeContext);
-            const experiences = [
-                { 
-                    title: "Senior Embedded Systems Engineer",
-                    company: "TechCorp Industries",
-                    period: "2018 - Present",
-                    description: "Leading development of cutting-edge embedded systems for automotive applications."
-                },
-                {
-                    title: "Embedded Software Developer",
-                    company: "InnovateTech Solutions",
-                    period: "2015 - 2018",
-                    description: "Contributed to the development of IoT devices and smart home products."
-                },
-                {
-                    title: "Junior Firmware Engineer",
-                    company: "MicroSys Corporation",
-                    period: "2013 - 2015",
-                    description: "Assisted in firmware development for consumer electronics products."
+            update() {
+                this.size -= 0.05;
+                if (this.size < 0) {
+                    this.x = (Math.random() * canvas.width) + canvas.width/2 - canvas.width;
+                    this.y = (Math.random() * canvas.height) + canvas.height/2 - canvas.height;
+                    this.size = (Math.random() * 5) + 2;
+                    this.weight = (Math.random() * 2) - 0.5;
                 }
-            ];
+                this.y += this.weight;
+                this.weight += 0.0005;
 
-            return (
-                <section className={`py-20 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}`}>
-                    <div className="container mx-auto px-6">
-                        <h2 className="text-3xl font-bold text-center mb-8">Professional Experience</h2>
-                        <div className="space-y-12">
-                            {experiences.map((exp, index) => (
-                                <div key={index} className="flex flex-col md:flex-row">
-                                    <div className="md:w-1/4">
-                                        <h3 className="text-xl font-semibold">{exp.title}</h3>
-                                        <p className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>{exp.company}</p>
-                                        <p className={isDarkMode ? 'text-gray-400' : 'text-gray-500'}>{exp.period}</p>
-                                    </div>
-                                    <div className="md:w-3/4 mt-4 md:mt-0">
-                                        <p className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>{exp.description}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-            );
+                if (this.y > canvas.height - this.size) {
+                    this.weight *= -1;
+                }
+
+                this.draw();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            for (let i = 0; i < 100; i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const size = (Math.random() * 5) + 2;
+                const color = 'rgba(255, 255, 255, 0.8)';
+                const weight = 1;
+                particlesArray.push(new Particle(x, y, size, color, weight));
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+
+        // Responsive navigation
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Form submission
+        const form = document.getElementById('contact-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Here you would typically send the form data to a server
+            // For this example, we'll just log it to the console
+            console.log('Form submitted:', {
+                name: form.name.value,
+                email: form.email.value,
+                message: form.message.value
+            });
+            alert('Thank you for your message! I\'ll get back to you soon.');
+            form.reset();
+        });
+
+        // Intersection Observer for fade-in animations
+        const faders = document.querySelectorAll('.fade-in');
+        const appearOptions = {
+            threshold: 0.5,
+            rootMargin: "0px 0px -100px 0px"
         };
 
-        // Contact Component
-        const Contact = () => {
-            const { isDarkMode } = useContext(ThemeContext);
-            const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('appear');
+                    appearOnScroll.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
 
-            const handleChange = (e) => {
-                setFormData({ ...formData, [e.target.name]: e.target.value });
-            };
-
-            const handleSubmit = (e) => {
-                e.preventDefault();
-                console.log('Form submitted:', formData);
-                alert('Thank you for your message! I will get back to you soon.');
-                setFormData({ name: '', email: '', message: '' });
-            };
-
-            return (
-                <section className={`py-20 ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
-                    <div className="container mx-auto px-6">
-                        <h2 className="text-3xl font-bold text-center mb-8">Get in Touch</h2>
-                        <form onSubmit={handleSubmit} className="max-w-lg mx-auto">
-                            <div className="mb-4">
-                                <label htmlFor="name" className="block font-bold mb-2">Name</label>
-                                <input
-                                    type="text"
-                                    id="name"
-                                    name="name"
-                                    value={formData.name}
-                                    onChange={handleChange}
-                                    className={`w-full px-3 py-2 border ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                                    required
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="email" className="block font-bold mb-2">Email</label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    className={`w-full px-3 py-2 border ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                                    required
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="message" className="block font-bold mb-2">Message</label>
-                                <textarea
-                                    id="message"
-                                    name="message"
-                                    value={formData.message}
-                                    onChange={handleChange}
-                                    rows="4"
-                                    className={`w-full px-3 py-2 border ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                    required
-                ></textarea>
-            </div>
-            <button
-                type="submit"
-                className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
-            >
-                Send Message
-            </button>
-        </form>
-    </div>
-</section>
-);
-};
-
-// Footer Component
-const Footer = () => {
-    const { isDarkMode } = useContext(ThemeContext);
-    return (
-        <footer className={`py-6 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-900'}`}>
-            <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
-                <div className="mb-4 md:mb-0">
-                    <p>&copy; 2024 John Doe. All rights reserved.</p>
-                </div>
-                <div className="flex space-x-4">
-                    <a href="#" className="hover:text-blue-400 transition duration-300">LinkedIn</a>
-                    <a href="#" className="hover:text-blue-400 transition duration-300">GitHub</a>
-                    <a href="#" className="hover:text-blue-400 transition duration-300">Twitter</a>
-                </div>
-            </div>
-        </footer>
-    );
-};
-
-// Main App Component
-const App = () => {
-    const [currentSection, setCurrentSection] = useState('home');
-    const { isDarkMode } = useContext(ThemeContext);
-
-    return (
-        <div className={`min-h-screen ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
-            <Header setCurrentSection={setCurrentSection} />
-            <main>
-                <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
-                    {currentSection === 'home' && <LazyHero />}
-                    {currentSection === 'skills' && <LazySkills />}
-                    {currentSection === 'projects' && <LazyProjects />}
-                    {currentSection === 'experience' && <LazyExperience />}
-                    {currentSection === 'contact' && <LazyContact />}
-                </Suspense>
-            </main>
-            <Footer />
-        </div>
-    );
-};
-
-// Render the app
-ReactDOM.render(
-    <ThemeProvider>
-        <App />
-    </ThemeProvider>,
-    document.getElementById('root')
-);
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+    </script>
+</body>
+</html>
