@@ -3,103 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mahmoud Ezzat - Pioneering Embedded Systems Engineer</title>
+    <title>Mahmoud Ezzat | Embedded Systems Engineer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap');
-
         :root {
-            --primary-color: #00ffd9;
-            --secondary-color: #ff00a6;
-            --tertiary-color: #7700ff;
-            --bg-color: #000814;
-            --text-color: #ffffff;
-            --accent-color: #ffd60a;
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --bg-color: #ecf0f1;
+            --card-bg: #fff;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .dark-mode {
+            --primary-color: #34495e;
+            --secondary-color: #2980b9;
+            --accent-color: #c0392b;
+            --text-color: #ecf0f1;
+            --bg-color: #2c3e50;
+            --card-bg: #34495e;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         body {
-            font-family: 'Roboto Mono', monospace;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-family: 'Poppins', sans-serif;
             line-height: 1.6;
-            overflow-x: hidden;
+            color: var(--text-color);
+            background-color: var(--bg-color);
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 20px;
         }
 
-        /* Cursor */
-        .cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--primary-color);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            transition: 0.1s;
-            z-index: 9999;
-        }
-
-        .cursor2 {
-            width: 10px;
-            height: 10px;
-            background-color: var(--secondary-color);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            transition: 0.15s;
-            z-index: 9999;
-        }
-
-        /* Header Styles */
         header {
+            background: var(--gradient);
+            color: #fff;
+            padding: 1rem 0;
             position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
+            top: 0;
             z-index: 1000;
-            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .header-content {
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
         }
 
         .logo {
-            font-family: 'Rajdhani', sans-serif;
             font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
-            fill: var(--primary-color);
-        }
-
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-color);
-            font-size: 1.5rem;
-            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .nav-links {
@@ -108,11 +75,11 @@
         }
 
         .nav-links li {
-            margin-left: 2rem;
+            margin-left: 30px;
         }
 
         .nav-links a {
-            color: var(--text-color);
+            color: #fff;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
@@ -122,219 +89,121 @@
         .nav-links a::after {
             content: '';
             position: absolute;
+            width: 0;
+            height: 2px;
             bottom: -5px;
             left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: var(--primary-color);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
         }
 
         .nav-links a:hover::after {
-            transform: scaleX(1);
+            width: 100%;
         }
 
-        /* Hero Section */
-        #hero {
+        .hero {
             height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            text-align: center;
+            background: var(--gradient);
             position: relative;
             overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('/api/placeholder/1920/1080') no-repeat center center/cover;
+            opacity: 0.1;
         }
 
         .hero-content {
-            text-align: center;
-            z-index: 2;
+            position: relative;
+            z-index: 1;
+            color: #fff;
         }
 
-        .hero-title {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 5rem;
-            font-weight: 700;
+        .hero h1 {
+            font-size: 4rem;
             margin-bottom: 1rem;
-            color: var(--primary-color);
-            text-shadow: 0 0 10px rgba(0, 255, 217, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: fadeInUp 1s ease;
         }
 
-        .hero-subtitle {
+        .hero p {
             font-size: 1.5rem;
             margin-bottom: 2rem;
-            color: var(--secondary-color);
+            animation: fadeInUp 1s ease 0.5s;
+            animation-fill-mode: both;
         }
 
-        .cta-button {
+        .btn {
             display: inline-block;
-            background-color: var(--primary-color);
-            color: var(--bg-color);
+            background-color: var(--accent-color);
+            color: #fff;
             padding: 1rem 2rem;
+            border: none;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
-            transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 1s;
+            animation-fill-mode: both;
         }
 
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(
-                from 0deg,
-                transparent 0deg 90deg,
-                var(--secondary-color) 90deg 180deg,
-                transparent 180deg 270deg,
-                var(--tertiary-color) 270deg 360deg
-            );
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            animation: rotate 4s linear infinite;
+        .btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .cta-button:hover::before {
-            opacity: 1;
+        section {
+            padding: 6rem 0;
         }
 
-        .cta-button span {
-            position: relative;
-            z-index: 1;
-        }
-
-        @keyframes rotate {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, #001f3f, #000814);
-        }
-
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* About Section */
-        #about {
-            padding: 8rem 0;
-            position: relative;
-            overflow: hidden;
+        h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary-color);
         }
 
         .about-content {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 4rem;
         }
 
         .about-text {
             flex: 1;
-            padding-right: 4rem;
-        }
-
-        .section-title {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 3rem;
-            margin-bottom: 2rem;
-            color: var(--primary-color);
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 50px;
-            height: 4px;
-            background-color: var(--secondary-color);
-        }
-
-        .about-description {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .tech-item {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: var(--primary-color);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .tech-item:hover {
-            background-color: var(--primary-color);
-            color: var(--bg-color);
-            transform: translateY(-3px);
         }
 
         .about-image {
             flex: 1;
-            position: relative;
+            text-align: center;
         }
 
         .about-image img {
-            width: 100%;
-            max-width: 500px;
+            max-width: 100%;
             border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 255, 217, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
         }
 
-        .experience-box {
-            position: absolute;
-            bottom: -30px;
-            right: 30px;
-            background-color: var(--tertiary-color);
-            color: var(--text-color);
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(119, 0, 255, 0.3);
-        }
-
-        .experience-number {
-            font-size: 3rem;
-            font-weight: 700;
-            line-height: 1;
-        }
-
-        .experience-text {
-            font-size: 1rem;
-            text-transform: uppercase;
-        }
-
-        /* Skills Section */
-        #skills {
-            padding: 8rem 0;
-            background-color: #000d1a;
-            position: relative;
-            overflow: hidden;
+        .about-image img:hover {
+            transform: scale(1.05);
         }
 
         .skills-grid {
@@ -344,70 +213,33 @@
         }
 
         .skill-card {
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
+            background-color: var(--card-bg);
             padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            transition: transform 0.3s ease;
         }
 
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(
-                from 0deg,
-                transparent 0deg 90deg,
-                var(--primary-color) 90deg 180deg,
-                transparent 180deg 270deg,
-                var(--secondary-color) 270deg 360deg
-            );
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            animation: rotate 4s linear infinite;
+        .skill-card:hover {
+            transform: translateY(-10px);
         }
 
-        .skill-card:hover::before {
-            opacity: 1;
-        }
-
-        .skill-card-content {
-            position: relative;
-            z-index: 1;
-            background-color: #000d1a;
-            border-radius: 8px;
-            padding: 1.5rem;
-            height: 100%;
-        }
-
-        .skill-icon {
+        .skill-card i {
             font-size: 3rem;
+            color: var(--secondary-color);
             margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
             color: var(--primary-color);
         }
 
-        .skill-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--text-color);
-        }
-
-        .skill-description {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* Projects Section */
-        #projects {
-            padding: 8rem 0;
-            position: relative;
-            overflow: hidden;
+        .skill-card p {
+            font-size: 1rem;
+            color: #666;
         }
 
         .projects-grid {
@@ -417,57 +249,22 @@
         }
 
         .project-card {
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: var(--card-bg);
             border-radius: 10px;
             overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
-            position: relative;
         }
 
         .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 255, 217, 0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
 
         .project-image {
             height: 200px;
             background-size: cover;
             background-position: center;
-            position: relative;
-        }
-
-        .project-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .project-card:hover .project-overlay {
-            opacity: 1;
-        }
-
-        .project-link {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.2rem;
-            border: 2px solid var(--primary-color);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-        }
-
-        .project-link:hover {
-            background-color: var(--primary-color);
-            color: var(--bg-color);
         }
 
         .project-info {
@@ -475,173 +272,154 @@
         }
 
         .project-title {
-            font-size: 1.2rem;
-            font-weight: 700;
+            font-size: 1.5rem;
             margin-bottom: 0.5rem;
             color: var(--primary-color);
         }
 
         .project-description {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            color: #666;
             margin-bottom: 1rem;
         }
 
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .project-tag {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: var(--secondary-color);
-            padding: 0.2rem 0.5rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-        }
-
-        /* Contact Section */
-        #contact {
-            padding: 8rem 0;
-            background-color: #000d1a;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-content {
+        .project-links {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
         }
 
-        .contact-info {
-            flex: 1;
-            padding-right: 4rem;
-        }
-
-        .contact-links {
-            list-style: none;
-            padding: 0;
-        }
-
-        .contact-links li {
-            margin-bottom: 1rem;
-        }
-
-        .contact-links a {
-            color: var(--text-color);
+        .project-links a {
+            color: var(--secondary-color);
             text-decoration: none;
-            display: flex;
-            align-items: center;
+            font-weight: bold;
             transition: color 0.3s ease;
         }
 
-        .contact-links a:hover {
+        .project-links a:hover {
             color: var(--primary-color);
         }
 
-        .contact-links i {
-            margin-right: 10px;
-            font-size: 1.2rem;
-        }
-
         .contact-form {
-            flex: 1;
-            background-color: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 3rem;
             border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .form-group {
             margin-bottom: 1.5rem;
         }
 
-        .form-group label {
+        label {
             display: block;
             margin-bottom: 0.5rem;
+            font-weight: bold;
             color: var(--primary-color);
         }
 
-        .form-group input,
-        .form-group textarea {
+        input,
+        textarea {
             width: 100%;
-            padding: 0.75rem;
-            border: none;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
             border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.1);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: 'Roboto Mono', monospace;
-            transition: all 0.3s ease;
         }
 
-        .form-group input:focus,
-        .form-group textarea:focus {
+        input:focus,
+        textarea:focus {
             outline: none;
-            box-shadow: 0 0 0 2px var(--primary-color);
+            border-color: var(--secondary-color);
         }
 
-        .form-group textarea {
+        textarea {
             height: 150px;
             resize: vertical;
         }
 
-        .submit-btn {
-            background-color: var(--primary-color);
-            color: var(--bg-color);
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .submit-btn:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 0, 166, 0.3);
-        }
-
-        /* Footer */
         footer {
-            background-color: #000814;
-            color: var(--text-color);
+            background-color: var(--primary-color);
+            color: #fff;
             text-align: center;
             padding: 2rem 0;
         }
 
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-logo {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
         .social-links {
-            display: flex;
-            gap: 1rem;
+            margin-top: 1rem;
         }
 
         .social-links a {
-            color: var(--text-color);
+            color: #fff;
             font-size: 1.5rem;
+            margin: 0 10px;
             transition: color 0.3s ease;
         }
 
         .social-links a:hover {
-            color: var(--primary-color);
+            color: var(--accent-color);
         }
 
-        /* Animations */
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+        }
+
+        .dark-mode-toggle:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: var(--bg-color);
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -653,366 +431,183 @@
             }
         }
 
-        .fade-in-up {
-            animation: fadeInUp 0.6s ease-out;
-        }
-
-        /* Responsive Design */
-        @media screen and (max-width: 768px) {
-            .nav-toggle {
-                display: block;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background-color: var(--bg-color);
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                transition: left 0.3s ease;
-            }
-
-            .nav-links.active {
-                left: 0;
-            }
-
-            .nav-links li {
-                margin: 1.5rem 0;
-            }
-
-            .about-content,
-            .contact-content {
+        @media (max-width: 768px) {
+            .about-content {
                 flex-direction: column;
             }
 
-            .about-text,
-            .about-image,
-            .contact-info,
-            .contact-form {
-                flex: 1;
-                width: 100%;
-                padding: 0;
+            .about-text {
+                order: 2;
+            }
+
+            .about-image {
+                order: 1;
                 margin-bottom: 2rem;
             }
 
-            .hero-title {
-                font-size: 3rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.2rem;
+            .projects-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="cursor"></div>
-    <div class="cursor2"></div>
-
     <header>
-        <div class="container">
-            <div class="header-content">
-                <a href="#" class="logo">
-                    <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z"></path>
-                        <path d="M9.293 6.293 5.586 10l3.707 3.707 1.414-1.414L8.414 10l2.293-2.293zm5.414 0-1.414 1.414L15.586 10l-2.293 2.293 1.414 1.414L18.414 10z"></path>
-                    </svg>
-                    Mahmoud Ezzat
-                </a>
-                <button class="nav-toggle" aria-label="toggle navigation">
-                    <span class="hamburger"></span>
-                </button>
-                <nav>
-                    <ul class="nav-links">
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#skills">Skills</a></li>
-                        <li><a href="#projects">Projects</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
+        <nav class="container">
+            <div class="logo">ME</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
-        <section id="hero">
-            <div class="hero-background"></div>
-            <canvas class="particles"></canvas>
-            <div class="container">
-                <div class="hero-content">
-                    <h1 class="hero-title">Mahmoud Ezzat</h1>
-                    <p class="hero-subtitle">Pioneering Embedded Systems Engineer</p>
-                    <a href="#contact" class="cta-button"><span>Get in Touch</span></a>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Mahmoud Ezzat</h1>
+                <p>Embedded Systems Engineer | Computer Engineering Student</p>
+                <a href="#contact" class="btn">Get in Touch</a>
+            </div>
+        </section>
+
+        <section id="about" class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Hello! I'm Mahmoud Ezzat, a passionate sophomore studying Computer Engineering at the Faculty of Electronic Engineering, Menoufia University. My focus is on embedded systems, where I combine my love for hardware and software to create innovative solutions.</p>
+                    <p>With a strong foundation in computer architecture, digital systems, and programming, I'm always eager to take on new challenges and expand my skillset. I'm currently seeking internship opportunities to apply my knowledge and gain real-world experience in the field of embedded systems.</p>
+                    <a href="#" class="btn" id="download-cv">Download CV</a>
+                </div>
+                <div class="about-image">
+                    <img src="/api/placeholder/400/400" alt="Mahmoud Ezzat">
                 </div>
             </div>
         </section>
 
-        <section id="about">
-            <div class="container">
-                <div class="about-content">
-                    <div class="about-text">
-                        <h2 class="section-title">About Me</h2>
-                        <p class="about-description">I'm a passionate Embedded Systems Engineer with over a decade of experience in developing cutting-edge solutions. My expertise lies in creating efficient, reliable, and innovative embedded systems that push the boundaries of what's possible in IoT, robotics, and autonomous systems.</p>
-                        <p class="about-description">With a strong foundation in both hardware and software, I bridge the gap between complex system requirements and elegant engineering solutions. My goal is to drive the future of technology through embedded systems that are not just functional, but transformative.</p>
-                        <div class="tech-stack">
-                            <span class="tech-item">C/C++</span>
-                            <span class="tech-item">Python</span>
-                            <span class="tech-item">RTOS</span>
-                            <span class="tech-item">ARM</span>
-                            <span class="tech-item">FPGA</span>
-                            <span class="tech-item">IoT</span>
-                        </div>
-                    </div>
-                    <div class="about-image">
-                        <img src="/api/placeholder/500/500" alt="Mahmoud Ezzat">
-                        <div class="experience-box">
-                            <div class="experience-number">10+</div>
-                            <div class="experience-text">Years of Experience</div>
-                        </div>
-                    </div>
+        <section id="skills" class="container">
+            <h2>Skills & Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fas fa-code"></i>
+                    <h3>C Programming</h3>
+                    <p>Advanced</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-microchip"></i>
+                    <h3>Embedded Systems</h3>
+                    <p>Intermediate</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Digital Logic Design</h3>
+                    <p>Advanced</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>VHDL</h3>
+                    <p>Intermediate</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-microchip"></i>
+                    <h3>Arduino</h3>
+                    <p>Advanced</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-sitemap"></i>
+                    <h3>Computer Architecture</h3>
+                    <p>Intermediate</p>
                 </div>
             </div>
         </section>
 
-        <section id="skills">
-            <div class="container">
-                <h2 class="section-title">Skills & Expertise</h2>
-                <div class="skills-grid">
-                    <div class="skill-card">
-                        <div class="skill-card-content">
-                            <div class="skill-icon">💻</div>
-                            <h3 class="skill-title">Embedded C/C++</h3>
-                            <p class="skill-description">Mastery in writing efficient, optimized code for microcontrollers and embedded systems.</p>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-card-content">
-                            <div class="skill-icon">⚙️</div>
-                            <h3 class="skill-title">RTOS & Bare-metal</h3>
-                            <p class="skill-description">Proficient in both RTOS-based and bare-metal firmware development for real-time applications.</p>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-card-content">
-                            <div class="skill-icon">📡</div>
-                            <h3 class="skill-title">IoT & Connectivity</h3>
-                            <p class="skill-description">Experienced in implementing various IoT protocols and wireless technologies (BLE, WiFi, LoRa).</p>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-card-content">
-                            <div class="skill-icon">🔌</div>
-                            <h3 class="skill-title">PCB Design</h3>
-                            <p class="skill-description">Skilled in designing and prototyping PCBs for embedded systems and IoT devices.</p>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-card-content">
-                            <div class="skill-icon">🤖</div>
-                            <h3 class="skill-title">Robotics & Control Systems</h3>
-                            <p class="skill-description">Proficient in developing control systems for robotics and autonomous applications.</p>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-card-content">
-                            <div class="skill-icon">🔍</div>
-                            <h3 class="skill-title">Debug & Optimization</h3>
-                            <p class="skill-description">Expert in using advanced debugging tools and techniques to optimize system performance.</p>
+        <section id="projects" class="container">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image" style="background-image: url('/api/placeholder/400/300');"></div>
+                    <div class="project-info">
+                        <h3 class="project-title">Smart Home System</h3>
+                        <p class="project-description">Developed an Arduino-based smart home system with temperature control, lighting automation, and security features.</p>
+                        <div class="project-links">
+                            <a href="#" class="project-details" data-project="smart-home">View Details</a>
+                            <a href="#" target="_blank">GitHub</a>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="projects">
-            <div class="container">
-                <h2 class="section-title">Featured Projects</h2>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <div class="project-image" style="background-image: url('/api/placeholder/300/200');"></div>
-                        <div class="project-overlay">
-                            <a href="#" class="project-link">View Project</a>
-                        </div>
-                        <div class="project-info">
-                            <h3 class="project-title">Autonomous Drone Controller</h3>
-                            <p class="project-description">Developed a high-performance flight controller for autonomous drones using advanced sensor fusion algorithms.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">C++</span>
-                                <span class="project-tag">RTOS</span>
-                                <span class="project-tag">Sensor Fusion</span>
-                            </div>
+                <div class="project-card">
+                    <div class="project-image" style="background-image: url('/api/placeholder/400/300');"></div>
+                    <div class="project-info">
+                        <h3 class="project-title">FPGA-based Traffic Light Controller</h3>
+                        <p class="project-description">Implemented a traffic light control system using VHDL on an FPGA, featuring adaptive timing and pedestrian crossing.</p>
+                        <div class="project-links">
+                            <a href="#" class="project-details" data-project="traffic-light">View Details</a>
+                            <a href="#" target="_blank">GitHub</a>
                         </div>
                     </div>
-                    <div class="project-card">
-                        <div class="project-image" style="background-image: url('/api/placeholder/300/200');"></div>
-                        <div class="project-overlay">
-                            <a href="#" class="project-link">View Project</a>
-                        </div>
-                        <div class="project-info">
-                            <h3 class="project-title">Smart Energy Management System</h3>
-                            <p class="project-description">Created an IoT-based energy monitoring and management system for smart homes and industrial applications.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">IoT</span>
-                                <span class="project-tag">MQTT</span>
-                                <span class="project-tag">Machine Learning</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <div class="project-image" style="background-image: url('/api/placeholder/300/200');"></div>
-                        <div class="project-overlay">
-                            <a href="#" class="project-link">View Project</a>
-                        </div>
-                        <div class="project-info">
-                            <h3 class="project-title">Wearable Health Monitor</h3>
-                            <p class="project-description">Engineered a low-power wearable device for real-time health monitoring with seamless cloud integration.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">ARM Cortex-M</span>
-                                <span class="project-tag">BLE</span>
-                                <span class="project-tag">Cloud Integration</span>
-                            </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image" style="background-image: url('/api/placeholder/400/300');"></div>
+                    <div class="project-info">
+                        <h3 class="project-title">Embedded Weather Station</h3>
+                        <p class="project-description">Created a low-power embedded weather station using an STM32 microcontroller, capable of measuring temperature, humidity, and air pressure.</p>
+                        <div class="project-links">
+                            <a href="#" class="project-details" data-project="weather-station">View Details</a>
+                            <a href="#" target="_blank">GitHub</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="contact">
-            <div class="container">
-                <h2 class="section-title">Get in Touch</h2>
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <p>I'm always open to new opportunities and collaborations. Feel free to reach out if you have any questions or just want to connect!</p>
-                        <ul class="contact-links">
-                            <li><a href="mailto:mahmoudezzat.ebrahim@gmail.com"><i class="fas fa-envelope"></i> mahmoudezzat.ebrahim@gmail.com</a></li>
-                            <li><a href="tel:+201060997561"><i class="fas fa-phone"></i> +201060997561</a></li>
-                            <li><a href="#"><i class="fas fa-map-marker-alt"></i> Giza, Egypt</a></li>
-                        </ul>
-                    </div>
-                    <form class="contact-form" id="contact-form">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">Send Message</button>
-                    </form>
+        <section id="contact" class="container">
+            <h2>Get in Touch</h2>
+            <form class="contact-form" action="#" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">Mahmoud Ezzat</div>
-                <div class="social-links">
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                </div>
+            <p>&copy; 2024 Mahmoud Ezzat. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
             </div>
-            <p>&copy; 2024  Mahmoud Ezzat. All rights reserved.</p>
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <button class="dark-mode-toggle" id="dark-mode-toggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title"></h2>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
     <script>
-        // Custom cursor
-        const cursor = document.querySelector('.cursor');
-        const cursor2 = document.querySelector('.cursor2');
-
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.cssText = cursor2.style.cssText = `left: ${e.clientX}px; top: ${e.clientY}px;`;
-        });
-
-        // Particle background
-        const canvas = document.querySelector('.particles');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        let particlesArray;
-
-        // Particle class
-        class Particle {
-            constructor(x, y, size, color, weight) {
-                this.x = x;
-                this.y = y;
-                this.size = size;
-                this.color = color;
-                this.weight = weight;
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-            }
-
-            update() {
-                this.size -= 0.05;
-                if (this.size < 0) {
-                    this.x = (Math.random() * canvas.width) + canvas.width/2 - canvas.width;
-                    this.y = (Math.random() * canvas.height) + canvas.height/2 - canvas.height;
-                    this.size = (Math.random() * 5) + 2;
-                    this.weight = (Math.random() * 2) - 0.5;
-                }
-                this.y += this.weight;
-                this.weight += 0.0005;
-
-                if (this.y > canvas.height - this.size) {
-                    this.weight *= -1;
-                }
-
-                this.draw();
-            }
-        }
-
-        function init() {
-            particlesArray = [];
-            for (let i = 0; i < 100; i++) {
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height;
-                const size = (Math.random() * 5) + 2;
-                const color = 'rgba(255, 255, 255, 0.8)';
-                const weight = 1;
-                particlesArray.push(new Particle(x, y, size, color, weight));
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-            }
-            requestAnimationFrame(animate);
-        }
-
-        init();
-        animate();
-
-        // Responsive navigation
-        const navToggle = document.querySelector('.nav-toggle');
-        const navLinks = document.querySelector('.nav-links');
-
-        navToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // Smooth scrolling for internal links
+        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1022,41 +617,116 @@
             });
         });
 
-        // Form submission
-        const form = document.getElementById('contact-form');
+        // Intersection Observer for revealing elements on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('section').forEach((section) => {
+            observer.observe(section);
+        });
+
+        // Form submission handling
+        const form = document.querySelector('.contact-form');
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             // Here you would typically send the form data to a server
-            // For this example, we'll just log it to the console
-            console.log('Form submitted:', {
-                name: form.name.value,
-                email: form.email.value,
-                message: form.message.value
-            });
-            alert('Thank you for your message! I\'ll get back to you soon.');
+            // For this example, we'll just show an alert
+            alert('Thank you for your message! I will get back to you soon.');
             form.reset();
         });
 
-        // Intersection Observer for fade-in animations
-        const faders = document.querySelectorAll('.fade-in');
-        const appearOptions = {
-            threshold: 0.5,
-            rootMargin: "0px 0px -100px 0px"
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const body = document.body;
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        });
+
+        // Project modal
+        const modal = document.getElementById('project-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalContent = document.getElementById('modal-content');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        const projectDetails = {
+            'smart-home': {
+                title: 'Smart Home System',
+                content: `
+                    <p>The Smart Home System is an Arduino-based project that integrates various sensors and actuators to create an automated and efficient home environment. Key features include:</p>
+                    <ul>
+                        <li>Temperature and humidity monitoring with automatic HVAC control</li>
+                        <li>Motion-activated lighting system</li>
+                        <li>Security system with door/window sensors and alarm</li>
+                        <li>Mobile app for remote monitoring and control</li>
+                    </ul>
+                    <p>Technologies used: Arduino, C++, IoT protocols, mobile app development</p>
+                `
+            },
+            'traffic-light': {
+                title: 'FPGA-based Traffic Light Controller',
+                content: `
+                    <p>This project implements a sophisticated traffic light control system using VHDL on an FPGA. The system features:</p>
+                    <ul>
+                        <li>Adaptive timing based on traffic flow</li>
+                        <li>Pedestrian crossing with countdown timer</li>
+                        <li>Emergency vehicle priority mode</li>
+                        <li>Fault detection and fail-safe operation</li>
+                    </ul>
+                    <p>Technologies used: VHDL, FPGA, digital logic design, state machines</p>
+                `
+            },
+            'weather-station': {
+                title: 'Embedded Weather Station',
+                content: `
+                    <p>The Embedded Weather Station is a low-power, high-precision environmental monitoring system built around an STM32 microcontroller. Key features include:</p>
+                    <ul>
+                        <li>Temperature, humidity, and barometric pressure sensing</li>
+                        <li>Solar-powered with battery backup</li>
+                        <li>LoRa wireless communication for long-range data transmission</li>
+                        <li>Web interface for data visualization and analysis</li>
+                    </ul>
+                    <p>Technologies used: STM32, C, LoRa, web development, data visualization</p>
+                `
+            }
         };
 
-        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) {
-                    return;
-                } else {
-                    entry.target.classList.add('appear');
-                    appearOnScroll.unobserve(entry.target);
-                }
+        document.querySelectorAll('.project-details').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const project = this.getAttribute('data-project');
+                modalTitle.textContent = projectDetails[project].title;
+                modalContent.innerHTML = projectDetails[project].content;
+                modal.style.display = 'block';
             });
-        }, appearOptions);
+        });
 
-        faders.forEach(fader => {
-            appearOnScroll.observe(fader);
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // CV download (simulated)
+        document.getElementById('download-cv').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('CV download started. (This is a simulated action)');
         });
     </script>
 </body>
