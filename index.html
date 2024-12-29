@@ -7,6 +7,31 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <style>
+        .hero-bg {
+            background: linear-gradient(135deg, #1E293B, #0F172A);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232563EB' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .highlight-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .title-gradient {
+            background: linear-gradient(to right, #60A5FA, #93C5FD);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
         @keyframes gradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -111,32 +136,44 @@
 </head>
 <body class="bg-gray-50">
   <!-- Hero Section -->
-    <section class="hero-gradient min-h-screen flex items-center text-white relative overflow-hidden">
-        <div class="container mx-auto px-4 py-16">
-            <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
-                <h1 class="text-5xl md:text-7xl font-bold mb-6">Mahmoud Ezzat</h1>
-                <p class="text-xl md:text-2xl mb-12 text-blue-100">Embedded Systems Engineering Student</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                    <div class="stats-card p-6" data-aos="fade-up" data-aos-delay="100">
-                        <h3 class="text-gray-800 text-4xl font-bold mb-2">3.58</h3>
-                        <p class="text-gray-600">GPA</p>
+ <section class="hero-bg min-h-screen relative">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/50 to-transparent"></div>
+        <div class="container mx-auto px-4 relative">
+            <div class="flex min-h-screen items-center">
+                <div class="w-full md:w-3/4 lg:w-2/3">
+                    <h1 class="text-5xl md:text-7xl font-bold mb-4 title-gradient tracking-tight">
+                        Mahmoud Ezzat
+                    </h1>
+                    <p class="text-xl md:text-2xl text-blue-100 mb-8 font-light">
+                        Embedded Systems Engineering Student & Hardware Innovation Specialist
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-6 mb-12">
+                        <div class="highlight-card p-6 rounded-xl">
+                            <div class="text-4xl font-bold text-white mb-2">3.58</div>
+                            <div class="text-blue-200 text-sm uppercase tracking-wider">Academic GPA</div>
+                        </div>
+                        <div class="highlight-card p-6 rounded-xl">
+                            <div class="text-4xl font-bold text-white mb-2">120+</div>
+                            <div class="text-blue-200 text-sm uppercase tracking-wider">Training Hours</div>
+                        </div>
+                        <div class="highlight-card p-6 rounded-xl">
+                            <div class="text-4xl font-bold text-white mb-2">2nd</div>
+                            <div class="text-blue-200 text-sm uppercase tracking-wider">RAC Rankings</div>
+                        </div>
                     </div>
-                    <div class="stats-card p-6" data-aos="fade-up" data-aos-delay="200">
-                        <h3 class="text-gray-800 text-4xl font-bold mb-2">120h</h3>
-                        <p class="text-gray-600">ITI Training</p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#projects" class="px-8 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors duration-300 flex items-center">
+                            View Projects
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                        <a href="#contact" class="px-8 py-3 border border-blue-300 text-blue-100 rounded-lg font-medium hover:bg-blue-600/10 transition-colors duration-300">
+                            Contact Me
+                        </a>
                     </div>
-                    <div class="stats-card p-6" data-aos="fade-up" data-aos-delay="300">
-                        <h3 class="text-gray-800 text-4xl font-bold mb-2">2nd</h3>
-                        <p class="text-gray-600">RAC Competition</p>
-                    </div>
-                </div>
-                <div class="flex justify-center space-x-4">
-                    <a href="#projects" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition duration-300">
-                        View Projects
-                    </a>
-                    <a href="#contact" class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300">
-                        Contact Me
-                    </a>
                 </div>
             </div>
         </div>
