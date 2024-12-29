@@ -87,6 +87,26 @@
             font-size: 3rem;
             font-weight: 800;
         }
+
+         /* Adding new styles for education and volunteering sections */
+        .education-card {
+            border-left: 4px solid #2563eb;
+            transition: all 0.3s ease;
+        }
+
+        .education-card:hover {
+            transform: translateX(10px);
+        }
+
+        .volunteer-card {
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .volunteer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -259,7 +279,112 @@
             </div>
         </div>
     </section>
+ <!-- Education Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16">Education</h2>
+            <div class="max-w-4xl mx-auto space-y-8">
+                <div class="education-card pl-6 py-6" data-aos="fade-left">
+                    <h3 class="text-2xl font-bold">Master of Engineering in Embedded Systems</h3>
+                    <p class="text-blue-600 mb-2">Technical University of Munich • 2017 - 2019</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Focus on Real-time Systems and IoT</li>
+                        <li>• Thesis: "Advanced Power Management in IoT Networks"</li>
+                        <li>• GPA: 3.9/4.0</li>
+                        <li>• Research Assistant in Embedded Systems Lab</li>
+                    </ul>
+                </div>
 
+                <div class="education-card pl-6 py-6" data-aos="fade-left" data-aos-delay="100">
+                    <h3 class="text-2xl font-bold">Bachelor of Engineering in Electronics</h3>
+                    <p class="text-blue-600 mb-2">Cairo University • 2013 - 2017</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• First Class Honours</li>
+                        <li>• Graduation Project: Smart Traffic Management System</li>
+                        <li>• GPA: 3.85/4.0</li>
+                        <li>• Technical Lead of Robotics Team</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Volunteering & Leadership Section -->
+    <section class="py-20 bg-blue-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16">Volunteering & Leadership</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="volunteer-card bg-white p-8 shadow-lg" data-aos="fade-up">
+                    <h3 class="text-2xl font-bold mb-4">President, Enactus TUM</h3>
+                    <p class="text-blue-600 mb-4">2018 - 2019</p>
+                    <ul class="space-y-3 text-gray-600">
+                        <li>• Led team of 50+ students in social entrepreneurship projects</li>
+                        <li>• Secured €50,000 in project funding through partnerships</li>
+                        <li>• Launched sustainable energy initiative reaching 1000+ households</li>
+                        <li>• Won National Social Innovation Competition 2019</li>
+                    </ul>
+                </div>
+
+                <div class="volunteer-card bg-white p-8 shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-2xl font-bold mb-4">Technical Mentor, IEEE Student Branch</h3>
+                    <p class="text-blue-600 mb-4">2016 - 2017</p>
+                    <ul class="space-y-3 text-gray-600">
+                        <li>• Mentored 20+ engineering students in embedded systems</li>
+                        <li>• Organized workshops reaching 200+ participants</li>
+                        <li>• Developed practical curriculum for microcontroller programming</li>
+                        <li>• Facilitated 5 successful student projects</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Projects Section -->
+    <section class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-white mb-16">Additional Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="project-card" data-aos="fade-up">
+                    <img src="/api/placeholder/600/400" alt="Smart Home System" class="w-full h-64 object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                        <h3 class="text-xl font-bold mb-2">Smart Home Energy Management</h3>
+                        <p class="text-gray-200 mb-4">IoT-based system reducing energy consumption by 30%</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">ESP32</span>
+                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">MQTT</span>
+                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">ML</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                    <img src="/api/placeholder/600/400" alt="Robotics Project" class="w-full h-64 object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                        <h3 class="text-xl font-bold mb-2">Autonomous Delivery Robot</h3>
+                        <p class="text-gray-200 mb-4">Campus delivery robot with obstacle avoidance</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">ROS</span>
+                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">Computer Vision</span>
+                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                    <img src="/api/placeholder/600/400" alt="Medical Device" class="w-full h-64 object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                        <h3 class="text-xl font-bold mb-2">Portable ECG Monitor</h3>
+                        <p class="text-gray-200 mb-4">Low-cost medical device for remote health monitoring</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">STM32</span>
+                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">BLE</span>
+                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">FDA Design</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Expertise -->
     <section class="py-20 bg-blue-50">
         <div class="container mx-auto px-4">
