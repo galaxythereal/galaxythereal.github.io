@@ -3,79 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mahmoud Ezzat | Engineering Impact</title>
+    <title>Mahmoud Ezzat | Embedded Systems & RTOS Engineer</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <style>
-        .hero-bg {
-            background: linear-gradient(135deg, #1E293B, #0F172A);
+        /* Advanced Circuit Board Background Animation */
+        .circuit-bg {
+            background: linear-gradient(135deg, #0a192f, #112240);
             position: relative;
             overflow: hidden;
         }
         
-        .hero-bg::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232563EB' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-
-        .highlight-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .title-gradient {
-            background: linear-gradient(to right, #60A5FA, #93C5FD);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .hero-gradient {
-            background: linear-gradient(-45deg, #1a365d, #2563eb, #0891b2, #0d9488);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-        }
-
-        .stats-card {
-            backdrop-filter: blur(16px) saturate(180%);
-            background-color: rgba(255, 255, 255, 0.75);
-            border-radius: 12px;
-            border: 1px solid rgba(209, 213, 219, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .stats-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-
-        .project-card {
-            position: relative;
-            overflow: hidden;
-            border-radius: 12px;
-        }
-
-        .project-card::before {
-            content: '';
+        .circuit-lines {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.8));
-            pointer-events: none;
+            background: 
+                linear-gradient(90deg, rgba(37,99,235,0.1) 1px, transparent 1px) 0 0 / 20px 20px,
+                linear-gradient(0deg, rgba(37,99,235,0.1) 1px, transparent 1px) 0 0 / 20px 20px;
+            animation: circuitFlow 20s linear infinite;
         }
 
-        .skill-progress {
-            transition: width 1.5s ease-in-out;
+        @keyframes circuitFlow {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(20px, 20px); }
+        }
+
+        /* Glowing Component Effect */
+        .glow-component {
+            position: relative;
+        }
+
+        .glow-component::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: inherit;
+            background: linear-gradient(45deg, #2563eb, #3b82f6, #60a5fa);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .glow-component:hover::after {
+            opacity: 1;
+        }
+
+        /* Technical Metrics Display */
+        .metric-display {
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .metric-display:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: rgba(37, 99, 235, 0.8);
+        }
+
+        /* Project Showcase Cards */
+        .project-showcase {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-showcase::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2563eb, #3b82f6);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .project-showcase:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* Technical Skill Visualization */
+        .skill-bar {
+            height: 8px;
+            background: linear-gradient(90deg, #2563eb var(--skill-level), #e2e8f0 var(--skill-level));
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .skill-bar::after {
+            content: attr(data-level);
+            position: absolute;
+            right: 0;
+            top: -25px;
+            font-size: 0.875rem;
+            color: #2563eb;
+        }
+
+        /* Code Section Styling */
+        .code-block {
+            font-family: 'Fira Code', monospace;
+            background: #1a1a1a;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .code-block::before {
+            content: '// Code Sample';
+            position: absolute;
+            top: 0.5rem;
+            right: 1rem;
+            color: #4b5563;
+            font-size: 0.875rem;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, #2563eb 0%, #60a5fa 100%);
         }
 
         .timeline-item {
@@ -87,91 +152,177 @@
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 2px;
-            background: #2563eb;
-        }
-
-        .timeline-item::after {
-            content: '';
-            position: absolute;
             left: -4px;
             top: 0;
             width: 10px;
             height: 10px;
             border-radius: 50%;
             background: #2563eb;
+            border: 2px solid white;
         }
 
-        .impact-number {
-            background: linear-gradient(45deg, #2563eb, #0891b2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 3rem;
-            font-weight: 800;
-        }
-
-         /* Adding new styles for education and volunteering sections */
-        .education-card {
-            border-left: 4px solid #2563eb;
-            transition: all 0.3s ease;
-        }
-
-        .education-card:hover {
-            transform: translateX(10px);
-        }
-
-        .volunteer-card {
+        /* Certifications Display */
+        .cert-card {
+            background: white;
             border-radius: 12px;
+            border: 1px solid #e5e7eb;
             transition: all 0.3s ease;
         }
 
-        .volunteer-card:hover {
+        .cert-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+                       0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Technical Diagram Styling */
+        .system-diagram {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .system-diagram svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Navigation Enhancement */
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 1rem;
+            color: #e2e8f0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #2563eb;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Contact Form Enhancement */
+        .contact-input {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+
+        .contact-input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
         }
     </style>
 </head>
 <body class="bg-gray-50">
-  <!-- Hero Section -->
- <section class="hero-bg min-h-screen relative">
-        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/50 to-transparent"></div>
-        <div class="container mx-auto px-4 relative">
-            <div class="flex min-h-screen items-center">
-                <div class="w-full md:w-3/4 lg:w-2/3">
-                    <h1 class="text-5xl md:text-7xl font-bold mb-4 title-gradient tracking-tight">
-                        Mahmoud Ezzat
-                    </h1>
-                    <p class="text-xl md:text-2xl text-blue-100 mb-8 font-light">
-                        Embedded Systems Engineering Student & Hardware Innovation Specialist
-                    </p>
-                    
-                    <div class="grid grid-cols-3 gap-6 mb-12">
-                        <div class="highlight-card p-6 rounded-xl">
-                            <div class="text-4xl font-bold text-white mb-2">3.58</div>
-                            <div class="text-blue-200 text-sm uppercase tracking-wider">Academic GPA</div>
+    <!-- Hero Section -->
+    <section class="circuit-bg min-h-screen relative">
+        <div class="circuit-lines"></div>
+        <div class="container mx-auto px-4 py-16 relative">
+            <!-- Navigation -->
+            <nav class="flex justify-between items-center mb-16">
+                <div class="text-2xl font-bold text-white flex items-center">
+                    <span class="text-blue-500">&lt;</span>
+                    ME
+                    <span class="text-blue-500">/&gt;</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#expertise" class="nav-link">Technical Expertise</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#experience" class="nav-link">Experience</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+            </nav>
+
+            <!-- Hero Content -->
+            <div class="flex min-h-[70vh] items-center">
+                <div class="w-full lg:w-2/3">
+                    <div class="mb-12">
+                        <div class="text-blue-400 font-mono mb-4">
+                            <span class="text-gray-400">01</span> class <span class="text-blue-400">EmbeddedEngineer</span> {
                         </div>
-                        <div class="highlight-card p-6 rounded-xl">
-                            <div class="text-4xl font-bold text-white mb-2">120+</div>
-                            <div class="text-blue-200 text-sm uppercase tracking-wider">Training Hours</div>
+                        <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white tracking-tight">
+                            Mahmoud Ezzat
+                        </h1>
+                        <div class="space-y-4">
+                            <p class="text-xl md:text-2xl text-blue-200">
+                                Embedded Systems & RTOS Specialist
+                            </p>
+                            <p class="text-gray-400 max-w-2xl leading-relaxed">
+                                Focused on developing robust embedded solutions with expertise in real-time operating systems,
+                                microcontroller programming, and automotive systems. Committed to writing efficient, 
+                                maintainable, and MISRA-compliant code.
+                            </p>
                         </div>
-                        <div class="highlight-card p-6 rounded-xl">
-                            <div class="text-4xl font-bold text-white mb-2">2nd</div>
-                            <div class="text-blue-200 text-sm uppercase tracking-wider">RAC Rankings</div>
+                        <div class="text-blue-400 font-mono mt-4">}</div>
+                    </div>
+
+                    <!-- Technical Metrics -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+                        <div class="metric-display p-6 rounded-xl text-center">
+                            <div class="text-3xl font-bold text-blue-400 mb-2" data-count="3.58">3.58</div>
+                            <div class="text-gray-400 text-sm uppercase tracking-wider">CGPA</div>
+                        </div>
+                        <div class="metric-display p-6 rounded-xl text-center">
+                            <div class="text-3xl font-bold text-blue-400 mb-2" data-count="120">120+</div>
+                            <div class="text-gray-400 text-sm uppercase tracking-wider">Training Hours</div>
+                        </div>
+                        <div class="metric-display p-6 rounded-xl text-center">
+                            <div class="text-3xl font-bold text-blue-400 mb-2" data-count="15">15+</div>
+                            <div class="text-gray-400 text-sm uppercase tracking-wider">Projects</div>
+                        </div>
+                        <div class="metric-display p-6 rounded-xl text-center">
+                            <div class="text-3xl font-bold text-blue-400 mb-2">2nd</div>
+                            <div class="text-gray-400 text-sm uppercase tracking-wider">RAC Rankings</div>
                         </div>
                     </div>
 
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#projects" class="px-8 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors duration-300 flex items-center">
-                            View Projects
-                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    <!-- Code Sample Preview -->
+                    <div class="code-block mb-12 text-sm">
+                        <pre><code class="language-c">
+/* RTOS Task Implementation Example */
+void vSensorTask(void *pvParameters) {
+    static sensor_data_t data;
+    
+    while(1) {
+        if(xSemaphoreTake(xI2CMutex, pdMS_TO_TICKS(100))) {
+            data = read_sensor_data();
+            xSemaphoreGive(xI2CMutex);
+            
+            xQueueSend(xDataQueue, &data, portMAX_DELAY);
+            vTaskDelay(pdMS_TO_TICKS(100));
+        }
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- Call to Action -->
+                    <div class="flex flex-wrap gap-6">
+                        <a href="#contact" 
+                           class="px-8 py-4 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 
+                                  transition-colors duration-300 flex items-center">
+                            <span>Let's Collaborate</span>
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                      d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                             </svg>
                         </a>
-                        <a href="#contact" class="px-8 py-3 border border-blue-300 text-blue-100 rounded-lg font-medium hover:bg-blue-600/10 transition-colors duration-300">
-                            Contact Me
+                        <a href="#projects" 
+                           class="px-8 py-4 border border-blue-400 text-blue-400 rounded-lg font-medium 
+                                  hover:bg-blue-600/10 transition-colors duration-300">
+                            View Technical Projects
                         </a>
                     </div>
                 </div>
@@ -179,8 +330,295 @@
         </div>
     </section>
 
+    <!-- Technical Expertise Section -->
+    <section id="expertise" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16">Technical Expertise</h2>
+            
+            <!-- Core Skills -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-6xl mx-auto">
+                <div>
+                    <h3 class="text-2xl font-bold mb-8">Core Competencies</h3>
+                    <div class="space-y-8">
+                        <div class="skill-container">
+                            <div class="flex justify-between mb-2">
+                                <span class="font-semibold">Embedded C/C++ Development</span>
+                                <span class="text-blue-600">Advanced</span>
+                            </div>
+                            <div class="skill-bar" style="--skill-level: 90%" data-level="90%"></div>
+                            <ul class="mt-2 text-sm text-gray-600 space-y-1">
+                                <li>• MISRA-C Compliance</li>
+                                <li>• Bare-metal Programming</li>
+                                <li>• Memory Optimization</li>
+                            </ul>
+                        </div>
+
+                        <div class="skill-container">
+                            <div class="flex justify-between mb-2">
+                                <span class="font-semibold">RTOS & System Architecture</span>
+                                <span class="text-blue-600">Advanced</span>
+                            </div>
+                            <div class="skill-bar" style="--skill-level: 85%" data-level="85%"></div>
+                            <ul class="mt-2 text-sm text-gray-600 space-y-1">
+                                <li>• FreeRTOS Implementation</li>
+                                <li>• Task Scheduling</li>
+                                <li>• Real-time Constraints</li>
+                            </ul>
+                        </div>
+
+                        <div class="skill-container">
+                            <div class="flex justify-between mb-2">
+                                <span class="font-semibold">Microcontroller Architecture</span>
+                                <span class="text-blue-600">Advanced</span>
+                            </div>
+                            <div class="skill-bar" style="--skill-level: 88%" data-level="88%"></div>
+                            <ul class="mt-2 text-sm text-gray-600 space-y-1">
+                                <li>• ARM Cortex-M Series</li>
+                                <li>• AVR Architecture</li>
+                                <li>• Peripheral Configuration</li>
+                            </ul>
+                        </div>
+
+                        <div class="skill-container">
+                            <div class="flex justify-between mb-2">
+                                <span class="font-semibold">Communication Protocols</span>
+                                <span class="text-blue-600">Advanced</span>
+                            </div>
+                            <div class="skill-bar" style="--skill-level: 85%" data-level="85%"></div>
+                            <ul class="mt-2 text-sm text-gray-600 space-y-1">
+                                <li>• CAN Bus Implementation</li>
+                                <li>• I²C/SPI/UART</li>
+                                <li>• Protocol Stack Development</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Stack -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-8">Technical Stack</h3>
+                    <div class="grid grid-cols-1 gap-6">
+                        <div class="p-6 bg-gray-50 rounded-xl border border-gray-200">
+                            <h4 class="font-semibold text-lg mb-4">Development Environment</h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="space-y-2">
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
+                                        <span>Keil MDK-ARM</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
+                                        <span>IAR Embedded Workbench</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
+                                        <span>STM32CubeIDE</span>
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
+                                        <span>Atmel Studio</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
+                                        <span>Code Composer Studio</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
+                                        <span>Eclipse IDE</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 bg-gray-50 rounded-xl border border-gray-200">
+                            <h4 class="font-semibold text-lg mb-4">Testing & Debugging</h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="space-y-2">
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
+                                        <span>JTAG/SWD Debugging</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
+                                        <span>Logic Analyzers</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
+                                        <span>Oscilloscopes</span>
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
+                                        <span>Unit Testing</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
+                                        <span>Static Analysis</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
+                                        <span>Protocol Analyzers</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 bg-gray-50 rounded-xl border border-gray-200">
+                            <h4 class="font-semibold text-lg mb-4">Version Control & CI/CD</h4>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Git</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Jenkins</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">JIRA</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Confluence</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Azure DevOps</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section id="projects" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-white mb-16">Technical Projects</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                <!-- Project 1: Automotive Gateway -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg project-showcase">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold">Automotive Gateway Module</h3>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Featured</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Multi-protocol gateway supporting CAN, LIN, and Ethernet communication for vehicle diagnostics.
+                        </p>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <span>AUTOSAR-compliant architecture</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <span>Real-time message routing</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <span>Diagnostic data logging</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">STM32H7</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">FreeRTOS</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">CAN-FD</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">TCP/IP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: RTOS-based Data Logger -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg project-showcase">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold">Real-Time Data Logger</h3>
+                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Completed</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            High-precision data acquisition system for industrial sensor monitoring with strict timing requirements.
+                        </p>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <span>1ms sampling precision</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <span>Multi-sensor fusion</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <span>SD card storage optimization</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">ARM Cortex-M4</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">µC/OS-III</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">FATFS</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">DMA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Smart Home System -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg project-showcase">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold">Smart Home System</h3>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Featured</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            IoT-enabled home automation system with real-time monitoring and control capabilities.
+                        </p>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <span>Wireless sensor network</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <span>Cloud integration</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <span>Mobile app control</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">ESP32</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">MQTT</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">Firebase</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">React Native</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Education Section -->
-    <section class="py-20">
+    <section class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-4xl font-bold text-center mb-16">Education</h2>
             <div class="max-w-4xl mx-auto space-y-8">
@@ -207,168 +645,50 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section class="py-20 bg-gray-900">
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center text-white mb-16">Featured Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="project-card" data-aos="fade-up">
-                    <img src="/api/placeholder/600/400" alt="Smart Home System" class="w-full h-64 object-cover">
-                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                        <h3 class="text-2xl font-bold mb-2">Smart Home Automation System</h3>
-                        <p class="text-gray-200 mb-4">ITI Graduation Project using ATMega32 microcontroller</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">ATMega32</span>
-                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">C</span>
-                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">Sensors</span>
-                        </div>
+            <h2 class="text-4xl font-bold text-center mb-16">Experience</h2>
+            <div class="max-w-5xl mx-auto">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3 class="text-2xl font-bold">Embedded Software Engineer Intern</h3>
+                        <p class="text-blue-600 mb-2">Nissan Motors Egypt • Jan 2024 - Present</p>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>• Developing firmware for automotive ECUs</li>
+                            <li>• Implementing real-time communication protocols</li>
+                            <li>• Collaborating with cross-functional teams</li>
+                        </ul>
                     </div>
-                </div>
 
-                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-                    <img src="/api/placeholder/600/400" alt="Robotics Project" class="w-full h-64 object-cover">
-                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                        <h3 class="text-2xl font-bold mb-2">Line Following Robot</h3>
-                        <p class="text-gray-200 mb-4">Award-winning robotics competition project</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">Arduino</span>
-                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">Sensors</span>
-                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">Motors</span>
-                        </div>
+                    <div class="timeline-item">
+                        <h3 class="text-2xl font-bold">Research Assistant</h3>
+                        <p class="text-blue-600 mb-2">Menoufia University • Sep 2023 - Dec 2023</p>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>• Conducting research on IoT-based home automation</li>
+                            <li>• Prototyping and testing embedded systems</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Leadership Section -->
-    <section class="py-20 bg-blue-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-16">Leadership & Activities</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <div class="volunteer-card bg-white p-8 shadow-lg" data-aos="fade-up">
-                    <h3 class="text-2xl font-bold mb-4">Team President, Enactus Menoufia University</h3>
-                    <p class="text-blue-600 mb-4">Aug 2023 - Present</p>
-                    <ul class="space-y-3 text-gray-600">
-                        <li>• Leading a team of 120 members in community development projects</li>
-                        <li>• Managing project planning, budgeting, and execution</li>
-                        <li>• Won Orascom award in entrepreneurship</li>
-                        <li>• Organizing leadership development workshops</li>
-                    </ul>
-                </div>
-
-                <div class="volunteer-card bg-white p-8 shadow-lg" data-aos="fade-up" data-aos-delay="100">
-                    <h3 class="text-2xl font-bold mb-4">IEEE Menoufia Student Branch</h3>
-                    <p class="text-blue-600 mb-4">May 2024 - Present</p>
-                    <ul class="space-y-3 text-gray-600">
-                        <li>• Active member of Robotics and Systems (RAS) team</li>
-                        <li>• Participating in robotics solution design</li>
-                        <li>• Contributing to technical workshops</li>
-                        <li>• Collaborating on innovative projects</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Technical Skills -->
+    <!-- Certifications Section -->
     <section class="py-20 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-16">Technical Skills</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-                <div data-aos="fade-right">
-                    <h3 class="text-2xl font-bold mb-6">Core Skills</h3>
-                    <div class="space-y-6">
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold">C Programming</span>
-                                <span class="text-blue-600">Advanced</span>
-                            </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2">
-                                <div class="bg-blue-600 h-2 rounded-full skill-progress" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold">Microcontrollers (AVR, ARM)</span>
-                                <span class="text-blue-600">Intermediate</span>
-                            </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2">
-                                <div class="bg-blue-600 h-2 rounded-full skill-progress" style="width: 75%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold">Assembly</span>
-                                <span class="text-blue-600">Intermediate</span>
-                            </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2">
-                                <div class="bg-blue-600 h-2 rounded-full skill-progress" style="width: 70%"></div>
-                            </div>
-                        </div>
-                    </div>
+            <h2 class="text-4xl font-bold text-center mb-16">Certifications</h2>
+            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="cert-card p-6">
+                    <h3 class="text-2xl font-bold mb-4">Certified Embedded Systems Engineer</h3>
+                    <p class="text-blue-600 mb-2">Embedded Systems Institute • Jan 2024</p>
+                    <p class="text-gray-600">Advanced certification in embedded systems development and real-time operating systems.</p>
                 </div>
 
-                <div data-aos="fade-left">
-                    <h3 class="text-2xl font-bold mb-6">Tools & Technologies</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <div class="bg-white px-4 py-2 rounded-lg shadow-sm">
-                            <span class="font-semibold">Arduino</span>
-                            <span class="text-sm text-gray-500 block">Development</span>
-                        </div>
-                        <div class="bg-white px-4 py-2 rounded-lg shadow-sm">
-                            <span class="font-semibold">Git</span>
-                            <span class="text-sm text-gray-500 block">Version Control</span>
-                        </div>
-                        <div class="bg-white px-4 py-2 rounded-lg shadow-sm">
-                            <span class="font-semibold">Eagle</span>
-                            <span class="text-sm text-gray-500 block">PCB Design</span>
-                        </div>
-                        <div class="bg-white px-4 py-2 rounded-lg shadow-sm">
-                            <span class="font-semibold">Python</span>
-                            <span class="text-sm text-gray-500 block">Programming</span>
-                        </div>
-                        <div class="bg-white px-4 py-2 rounded-lg shadow-sm">
-                            <span class="font-semibold">C++</span>
-                            <span class="text-sm text-gray-500 block">Programming</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Achievements Section -->
-    <section class="py-20 bg-blue-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-16">Achievements</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <div class="bg-white rounded-xl p-8 shadow-lg" data-aos="fade-up">
-                    <h3 class="text-2xl font-bold mb-6">Competitions</h3>
-                    <div class="space-y-6">
-                        <div>
-                            <h4 class="font-semibold text-blue-600">2nd Place - RAC Competition</h4>
-                            <p class="text-gray-600 mt-2">Robotics Annual Competition at NCA</p>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-blue-600">WRO Participant</h4>
-                            <p class="text-gray-600 mt-2">World Robotics Olympiad - Nissan Motors Egypt Representative</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-xl p-8 shadow-lg" data-aos="fade-up" data-aos-delay="100">
-                    <h3 class="text-2xl font-bold mb-6">Academic & Leadership</h3>
-                    <div class="space-y-6">
-                        <div>
-                            <h4 class="font-semibold text-blue-600">Excellence Award - ITI</h4>
-                            <p class="text-gray-600 mt-2">Top performance in Embedded Systems Diploma</p>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-blue-600">Orascom Entrepreneurship Award</h4>
-                            <p class="text-gray-600 mt-2">Through Enactus leadership</p>
-                        </div>
-                    </div>
+                <div class="cert-card p-6">
+                    <h3 class="text-2xl font-bold mb-4">AUTOSAR Foundation Certificate</h3>
+                    <p class="text-blue-600 mb-2">AUTOSAR Partner University • Mar 2024</p>
+                    <p class="text-gray-600">Proficiency in AUTOSAR architecture and automotive software development.</p>
                 </div>
             </div>
         </div>
@@ -397,7 +717,6 @@
                         Send Message
                     </button>
                 </form>
-
                 <div class="mt-12 flex justify-center space-x-6">
                     <a href="https://linkedin.com/in/mahmoudezzat" target="_blank"
                         class="text-blue-300 hover:text-white transition">
@@ -417,439 +736,5 @@
             </div>
         </div>
     </section>
-
-
-    <!-- Impact Section -->
-    <section id="impact" class="py-20">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-16">Engineering Impact</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Key Achievement Cards -->
-                <div class="bg-white rounded-xl p-8 shadow-lg" data-aos="fade-up">
-                    <div class="mb-6">
-                        <span class="text-5xl text-blue-600">🚗</span>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">Automotive Revolution</h3>
-                    <p class="text-gray-600 mb-4">Led development of next-gen ADAS system, reducing accident rates by 45% in pilot programs.</p>
-                    <ul class="space-y-2 text-gray-600">
-                        <li>• ISO 26262 ASIL-D Compliance</li>
-                        <li>• 0.2ms Response Time</li>
-                        <li>• 99.99% Reliability Rate</li>
-                    </ul>
-                </div>
-
-                <div class="bg-white rounded-xl p-8 shadow-lg" data-aos="fade-up" data-aos-delay="100">
-                    <div class="mb-6">
-                        <span class="text-5xl">🔋</span>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">Power Optimization</h3>
-                    <p class="text-gray-600 mb-4">Developed innovative power management system extending IoT device battery life by 300%.</p>
-                    <ul class="space-y-2 text-gray-600">
-                        <li>• 0.5μA Sleep Current</li>
-                        <li>• 5+ Year Battery Life</li>
-                        <li>• Patent Pending</li>
-                    </ul>
-                </div>
-
-                <div class="bg-white rounded-xl p-8 shadow-lg" data-aos="fade-up" data-aos-delay="200">
-                    <div class="mb-6">
-                        <span class="text-5xl">⚡</span>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">Performance Boost</h3>
-                    <p class="text-gray-600 mb-4">Optimized RTOS scheduler reducing system latency by 40% in industrial controllers.</p>
-                    <ul class="space-y-2 text-gray-600">
-                        <li>• 50μs Context Switch</li>
-                        <li>• Zero Priority Inversion</li>
-                        <li>• DO-178C Certified</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Showcase -->
-    <section class="py-20 bg-gray-900">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center text-white mb-16">Featured Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="project-card" data-aos="fade-up">
-                    <img src="/api/placeholder/600/400" alt="Automotive ECU" class="w-full h-64 object-cover">
-                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                        <h3 class="text-2xl font-bold mb-2">Next-Gen Automotive ECU</h3>
-                        <p class="text-gray-200 mb-4">Revolutionary engine control unit with advanced diagnostics and OTA updates.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">AUTOSAR</span>
-                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">ISO 26262</span>
-                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">CAN-FD</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-                    <img src="/api/placeholder/600/400" alt="Smart Factory System" class="w-full h-64 object-cover">
-                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                        <h3 class="text-2xl font-bold mb-2">Smart Factory System</h3>
-                        <p class="text-gray-200 mb-4">Industry 4.0 implementation reducing downtime by 75% through predictive maintenance.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">RT Linux</span>
-                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">OPC-UA</span>
-                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">TSN</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Technical Leadership -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-16">Technical Leadership</h2>
-            <div class="max-w-4xl mx-auto">
-                <div class="timeline-item" data-aos="fade-up">
-                    <div class="ml-8">
-                        <h3 class="text-2xl font-bold mb-2">Principal Embedded Systems Engineer</h3>
-                        <p class="text-gray-600 mb-4">TechCorp Industries • 2022 - Present</p>
-                        <div class="bg-blue-50 rounded-lg p-6">
-                            <h4 class="font-semibold mb-2">Key Achievements:</h4>
-                            <ul class="space-y-2">
-                                <li class="flex items-center">
-                                    <span class="text-blue-600 mr-2">▹</span>
-                                    Led architecture design for autonomous vehicle control systems, resulting in 40% performance improvement
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="text-blue-600 mr-2">▹</span>
-                                    Mentored team of 12 engineers, achieving 95% on-time project delivery
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="text-blue-600 mr-2">▹</span>
-                                    Implemented CI/CD pipeline reducing deployment time by 60%
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item" data-aos="fade-up">
-                    <div class="ml-8">
-                        <h3 class="text-2xl font-bold mb-2">Senior Embedded Software Engineer</h3>
-                        <p class="text-gray-600 mb-4">IoT Solutions Inc. • 2019 - 2022</p>
-                        <div class="bg-blue-50 rounded-lg p-6">
-                            <h4 class="font-semibold mb-2">Key Achievements:</h4>
-                            <ul class="space-y-2">
-                                <li class="flex items-center">
-                                    <span class="text-blue-600 mr-2">▹</span>
-                                    Developed power-optimized firmware extending battery life by 300%
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="text-blue-600 mr-2">▹</span>
-                                    Filed 8 patents for innovative IoT solutions
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="text-blue-600 mr-2">▹</span>
-                                    Reduced manufacturing costs by 35% through hardware optimization
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
- <!-- Education Section -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-16">Education</h2>
-            <div class="max-w-4xl mx-auto space-y-8">
-                <div class="education-card pl-6 py-6" data-aos="fade-left">
-                    <h3 class="text-2xl font-bold">Master of Engineering in Embedded Systems</h3>
-                    <p class="text-blue-600 mb-2">Technical University of Munich • 2017 - 2019</p>
-                    <ul class="space-y-2 text-gray-600">
-                        <li>• Focus on Real-time Systems and IoT</li>
-                        <li>• Thesis: "Advanced Power Management in IoT Networks"</li>
-                        <li>• GPA: 3.9/4.0</li>
-                        <li>• Research Assistant in Embedded Systems Lab</li>
-                    </ul>
-                </div>
-
-                <div class="education-card pl-6 py-6" data-aos="fade-left" data-aos-delay="100">
-                    <h3 class="text-2xl font-bold">Bachelor of Engineering in Electronics</h3>
-                    <p class="text-blue-600 mb-2">Cairo University • 2013 - 2017</p>
-                    <ul class="space-y-2 text-gray-600">
-                        <li>• First Class Honours</li>
-                        <li>• Graduation Project: Smart Traffic Management System</li>
-                        <li>• GPA: 3.85/4.0</li>
-                        <li>• Technical Lead of Robotics Team</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Volunteering & Leadership Section -->
-    <section class="py-20 bg-blue-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-16">Volunteering & Leadership</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <div class="volunteer-card bg-white p-8 shadow-lg" data-aos="fade-up">
-                    <h3 class="text-2xl font-bold mb-4">President, Enactus TUM</h3>
-                    <p class="text-blue-600 mb-4">2018 - 2019</p>
-                    <ul class="space-y-3 text-gray-600">
-                        <li>• Led team of 50+ students in social entrepreneurship projects</li>
-                        <li>• Secured €50,000 in project funding through partnerships</li>
-                        <li>• Launched sustainable energy initiative reaching 1000+ households</li>
-                        <li>• Won National Social Innovation Competition 2019</li>
-                    </ul>
-                </div>
-
-                <div class="volunteer-card bg-white p-8 shadow-lg" data-aos="fade-up" data-aos-delay="100">
-                    <h3 class="text-2xl font-bold mb-4">Technical Mentor, IEEE Student Branch</h3>
-                    <p class="text-blue-600 mb-4">2016 - 2017</p>
-                    <ul class="space-y-3 text-gray-600">
-                        <li>• Mentored 20+ engineering students in embedded systems</li>
-                        <li>• Organized workshops reaching 200+ participants</li>
-                        <li>• Developed practical curriculum for microcontroller programming</li>
-                        <li>• Facilitated 5 successful student projects</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Additional Projects Section -->
-    <section class="py-20 bg-gray-900">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center text-white mb-16">Additional Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="project-card" data-aos="fade-up">
-                    <img src="/api/placeholder/600/400" alt="Smart Home System" class="w-full h-64 object-cover">
-                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                        <h3 class="text-xl font-bold mb-2">Smart Home Energy Management</h3>
-                        <p class="text-gray-200 mb-4">IoT-based system reducing energy consumption by 30%</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">ESP32</span>
-                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">MQTT</span>
-                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">ML</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-                    <img src="/api/placeholder/600/400" alt="Robotics Project" class="w-full h-64 object-cover">
-                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                        <h3 class="text-xl font-bold mb-2">Autonomous Delivery Robot</h3>
-                        <p class="text-gray-200 mb-4">Campus delivery robot with obstacle avoidance</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">ROS</span>
-                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">Computer Vision</span>
-                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">Python</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-                    <img src="/api/placeholder/600/400" alt="Medical Device" class="w-full h-64 object-cover">
-                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                        <h3 class="text-xl font-bold mb-2">Portable ECG Monitor</h3>
-                        <p class="text-gray-200 mb-4">Low-cost medical device for remote health monitoring</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">STM32</span>
-                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">BLE</span>
-                            <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">FDA Design</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Expertise -->
-    <section class="py-20 bg-blue-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-16">Technical Expertise</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-                <div data-aos="fade-right">
-                    <h3 class="text-2xl font-bold mb-6">Core Competencies</h3>
-                    <div class="space-y-6">
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold">Embedded Systems Architecture</span>
-                                <span class="text-blue-600">Expert</span>
-                            </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2">
-                                <div class="bg-blue-600 h-2 rounded-full skill-progress" style="width: 95%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold">RTOS & Kernel Development</span>
-                                <span class="text-blue-600">Expert</span>
-                            </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2">
-                                <div class="bg-blue-600 h-2 rounded-full skill-progress" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold">Safety-Critical Systems</span>
-                                <span class="text-blue-600">Expert</span>
-                            </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2">
-                                <div class="bg-blue-600 h-2 rounded-full skill-progress" style="width: 92%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div data-aos="fade-left">
-                    <h3 class="text-2xl font-bold mb-6">Specialized Skills</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <div class="bg-white px-4 py-2 rounded-lg shadow-sm">
-                            <span class="font-semibold">ISO 26262</span>
-                            <span class="text-sm text-gray-500 block">Safety Standards</span>
-                        </div>
-                        <div class="bg-white px-4 py-2 rounded-lg shadow-sm">
-                            <span class="font-semibold">AUTOSAR</span>
-                            <span class="text-sm text-gray-500 block">Architecture</span>
-                        </div>
-                        <div class="bg-white px-4 py-2 rounded-lg shadow-sm">
-                            <span class="font-semibold">FreeRTOS</span>
-                            <span class="text-sm text-gray-500 block">Expert</span>
-                        </div>
-                        <div class="bg-white px-4 py-2 rounded-lg shadow-sm">
-                            <span class="font-semibold">ARM Cortex-M</span>
-                            <span class="text-sm text-gray-500 block">Architecture</span>
-                        </div>
-                        <div class="bg-white px-4 py-2 rounded-lg shadow-sm">
-                            <span class="font-semibold">CAN/CAN-FD</span>
-                            <span class="text-sm text-gray-500 block">Protocol Expert</span>
-                        </div>
-                        <div class="bg-white px-4 py-2 rounded-lg shadow-sm">
-                            <span class="font-semibold">MISRA C</span>
-                            <span class="text-sm text-gray-500 block">Compliance</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Publications & Patents -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-16">Publications & Patents</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <div class="bg-gray-50 rounded-xl p-8" data-aos="fade-up">
-                    <h3 class="text-2xl font-bold mb-6">Patents</h3>
-                    <div class="space-y-6">
-                        <div>
-                            <h4 class="font-semibold text-blue-600">Power Management System for IoT Devices</h4>
-                            <p class="text-gray-600 mt-2">Patent No: US 2023/0123456</p>
-                            <p class="text-gray-600 mt-1">Novel approach reducing power consumption by 95%</p>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-blue-600">Real-time Task Scheduling Algorithm</h4>
-                            <p class="text-gray-600 mt-2">Patent No: US 2023/0789012</p>
-                            <p class="text-gray-600 mt-1">Innovative scheduling reducing system latency</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-gray-50 rounded-xl p-8" data-aos="fade-up" data-aos-delay="100">
-                    <h3 class="text-2xl font-bold mb-6">Publications</h3>
-                    <div class="space-y-6">
-                        <div>
-                            <h4 class="font-semibold text-blue-600">Advanced RTOS Optimization Techniques</h4>
-                            <p class="text-gray-600 mt-2">IEEE Embedded Systems Letters, 2023</p>
-                            <p class="text-gray-600 mt-1">Novel approach to real-time scheduling</p>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-blue-600">Next-Gen Automotive Safety Systems</h4>
-                            <p class="text-gray-600 mt-2">SAE International Journal, 2022</p>
-                            <p class="text-gray-600 mt-1">Framework for ASIL-D compliant systems</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-blue-900 text-white">
-        <div class="container mx-auto px-4">
-            <div class="max-w-3xl mx-auto text-center">
-                <h2 class="text-4xl font-bold mb-8">Let's Connect</h2>
-                <p class="text-xl text-blue-200 mb-12">Looking for an embedded systems expert to drive innovation in your team?</p>
-                
-                <form action="https://formspree.io/f/your-form-id" method="POST" class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <input type="text" name="name" placeholder="Your Name" required
-                            class="w-full px-4 py-3 rounded-lg bg-blue-800 border border-blue-700 text-white placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <input type="email" name="email" placeholder="Your Email" required
-                            class="w-full px-4 py-3 rounded-lg bg-blue-800 border border-blue-700 text-white placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-                    <input type="text" name="subject" placeholder="Subject" required
-                        class="w-full px-4 py-3 rounded-lg bg-blue-800 border border-blue-700 text-white placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <textarea name="message" rows="5" placeholder="Your Message" required
-                        class="w-full px-4 py-3 rounded-lg bg-blue-800 border border-blue-700 text-white placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                    <button type="submit"
-                        class="bg-white text-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition duration-300">
-                        Send Message
-                    </button>
-                </form>
-
-                <div class="mt-12 flex justify-center space-x-6">
-                    <a href="https://linkedin.com/in/mahmoudezzat" target="_blank"
-                        class="text-blue-300 hover:text-white transition">
-                        <span class="sr-only">LinkedIn</span>
-                        <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                        </svg>
-                    </a>
-                    <a href="https://github.com/mahmoudezzat" target="_blank"
-                        class="text-blue-300 hover:text-white transition">
-                        <span class="sr-only">GitHub</span>
-                        <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script>
-        // Initialize AOS
-        AOS.init({
-            duration: 1000,
-            once: true,
-            offset: 100
-        });
-
-        // Animate skill bars on scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.width = entry.target.getAttribute('data-width');
-                }
-            });
-        });
-
-        document.querySelectorAll('.skill-progress').forEach((progress) => {
-            progress.style.width = '0';
-            observer.observe(progress);
-        });
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
 </body>
 </html>
