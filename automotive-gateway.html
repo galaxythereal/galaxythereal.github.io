@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automotive Gateway Module</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        .project-container {
+          max-width: 800px;
+          margin: 2rem auto;
+            padding: 2rem;
+          background: #fff;
+           border-radius: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+        }
+        h1 {
+          font-size: 2.5rem;
+           font-weight: bold;
+            margin-bottom: 1rem;
+             color: #2563eb;
+         }
+
+       h2 {
+           font-size: 2rem;
+          font-weight: bold;
+            margin-bottom: 1rem;
+            color: #2563eb;
+
+         }
+
+         p {
+           margin-bottom: 1rem;
+              color: #374151;
+
+         }
+
+        img {
+            max-width: 100%;
+              height: auto;
+             margin-bottom: 1rem;
+        }
+         a {
+              color: #2563eb;
+            text-decoration: none;
+         }
+
+           a:hover {
+                text-decoration: underline;
+          }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="project-container">
+        <h1 class="text-4xl font-bold text-center mb-8 text-gray-800">Automotive Gateway Module</h1>
+        <img src="https://placehold.co/600x300?text=Automotive+Gateway+Module" alt="Automotive Gateway Module Placeholder" class="mx-auto mb-6 rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold mb-4 text-gray-700">Project Overview</h2>
+         <p class="text-gray-600 mb-6">
+            The Automotive Gateway Module is a multi-protocol communication interface designed for modern vehicles. This module supports CAN, LIN, and Ethernet communication, enabling seamless data exchange between various vehicle systems and external diagnostic tools. It adheres to AUTOSAR standards for software architecture and interoperability. The gateway is built on the STM32H7 microcontroller platform utilizing FreeRTOS for real-time task management.
+        </p>
+
+        <h2 class="text-2xl font-bold mb-4 text-gray-700">Key Features</h2>
+       <ul class="list-disc list-inside text-gray-600 mb-6">
+           <li>AUTOSAR-compliant software architecture</li>
+           <li>Real-time message routing with minimal latency</li>
+          <li>Supports CAN-FD protocol for high-speed communication</li>
+          <li>Ethernet TCP/IP stack for diagnostic over IP (DoIP)</li>
+          <li>LIN bus interface for local network communication</li>
+         <li>Diagnostic data logging capabilities for fault analysis</li>
+      </ul>
+        <h2 class="text-2xl font-bold mb-4 text-gray-700">Technologies Used</h2>
+        <ul class="list-disc list-inside text-gray-600 mb-6">
+             <li>Microcontroller: STM32H7 Series</li>
+           <li>Real-Time OS: FreeRTOS</li>
+           <li>Communication Protocols: CAN-FD, LIN, Ethernet (TCP/IP)</li>
+          <li>Standards: AUTOSAR</li>
+       </ul>
+
+        <p class="text-gray-600 mb-6">
+             <a href="https://github.com/mahmoudezzat/automotive-gateway-module" target="_blank">View on GitHub</a>
+        </p>
+       <div class="text-center mt-8">
+                <a href="index.html" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Back to Portfolio
+                </a>
+         </div>
+    </div>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+     <script>
+         AOS.init({
+                duration: 800,
+                once: true
+            });
+        </script>
+</body>
+</html>
