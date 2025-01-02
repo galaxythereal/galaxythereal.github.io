@@ -4,25 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mahmoud Ezzat | Embedded Systems & RTOS Engineer</title>
+    <!-- CDN Libraries -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
     <style>
+       /* Custom Cursor */
+        body {
+            cursor: none;
+        }
+         .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #2563eb;
+            pointer-events: none;
+            z-index: 1000;
+            transform: translate(-50%, -50%);
+             mix-blend-mode: difference;
+            transition: transform 0.1s ease, opacity 0.3s ease;
+        }
+
+        .custom-cursor-grow {
+            transform: translate(-50%, -50%) scale(2);
+        }
+            .custom-cursor-hidden{
+                opacity:0;
+            }
+
+
         /* Advanced Circuit Board Background Animation */
         .circuit-bg {
-            background: linear-gradient(135deg, #0a192f, #112240);
+             background: linear-gradient(135deg, #0a192f, #112240);
             position: relative;
             overflow: hidden;
         }
-        
+
         .circuit-lines {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                linear-gradient(90deg, rgba(37,99,235,0.1) 1px, transparent 1px) 0 0 / 20px 20px,
-                linear-gradient(0deg, rgba(37,99,235,0.1) 1px, transparent 1px) 0 0 / 20px 20px;
+            background:
+                linear-gradient(90deg, rgba(37, 99, 235, 0.1) 1px, transparent 1px) 0 0 / 20px 20px,
+                linear-gradient(0deg, rgba(37, 99, 235, 0.1) 1px, transparent 1px) 0 0 / 20px 20px;
             animation: circuitFlow 20s linear infinite;
         }
 
@@ -31,9 +58,45 @@
             100% { transform: translate(20px, 20px); }
         }
 
+           /* Floating Tech Stack Icons */
+        .tech-icon {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(37, 99, 235, 0.1);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .tech-icon svg {
+           width: 24px;
+            height: 24px;
+            fill: #2563eb;
+             transition: fill 0.3s ease;
+        }
+
+        .tech-icon:hover {
+            transform: scale(1.1);
+            background-color: rgba(37, 99, 235, 0.3);
+        }
+         .tech-icon:hover svg {
+            fill: #fff;
+        }
+
+           /* Dynamic Typing Text Animation */
+        .typed-cursor {
+            color: #2563eb;
+        }
+
         /* Glowing Component Effect */
         .glow-component {
             position: relative;
+             border-radius: 12px;
+            overflow: hidden;
+            
         }
 
         .glow-component::after {
@@ -54,6 +117,7 @@
             opacity: 1;
         }
 
+
         /* Technical Metrics Display */
         .metric-display {
             background: rgba(15, 23, 42, 0.95);
@@ -69,12 +133,18 @@
 
         /* Project Showcase Cards */
         .project-showcase {
-            background: white;
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 16px;
             overflow: hidden;
             position: relative;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(37, 99, 235, 0.2);
         }
+
+          .project-showcase:hover {
+             box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+         }
+
 
         .project-showcase::before {
             content: '';
@@ -93,11 +163,17 @@
         }
 
         /* Technical Skill Visualization */
-        .skill-bar {
+          .skill-container {
+                position: relative;
+            }
+
+
+            .skill-bar {
             height: 8px;
             background: linear-gradient(90deg, #2563eb var(--skill-level), #e2e8f0 var(--skill-level));
             border-radius: 4px;
             position: relative;
+              transition: width 0.5s ease;
         }
 
         .skill-bar::after {
@@ -108,6 +184,7 @@
             font-size: 0.875rem;
             color: #2563eb;
         }
+
 
         /* Code Section Styling */
         .code-block {
@@ -161,19 +238,20 @@
             border: 2px solid white;
         }
 
+
         /* Certifications Display */
         .cert-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 12px;
-            border: 1px solid #e5e7eb;
+            border: 1px solid rgba(37, 99, 235, 0.2);
             transition: all 0.3s ease;
+             
         }
 
-        .cert-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
-                       0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
+            .cert-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            }
 
         /* Technical Diagram Styling */
         .system-diagram {
@@ -181,12 +259,14 @@
             border: 1px solid rgba(37, 99, 235, 0.2);
             padding: 1.5rem;
             border-radius: 12px;
+            
         }
 
+
         .system-diagram svg {
-            max-width: 100%;
-            height: auto;
-        }
+             max-width: 100%;
+                height: auto;
+            }
 
         /* Navigation Enhancement */
         .nav-link {
@@ -224,24 +304,112 @@
             border-color: #2563eb;
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
         }
+
+
+        /* Glassmorphism */
+        .glassmorphism-card {
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 16px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                transition: transform 0.3s ease;
+
+            }
+        .glassmorphism-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .modal-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                display: none;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+             }
+
+            .modal {
+                background: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                max-width: 80%;
+                max-height: 80%;
+                overflow-y: auto;
+                position: relative;
+            }
+
+              .modal-close {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-size: 24px;
+                cursor: pointer;
+                color: #666;
+            }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 relative overflow-x-hidden">
+    <div class="custom-cursor"></div>
     <!-- Hero Section -->
     <section class="circuit-bg min-h-screen relative">
         <div class="circuit-lines"></div>
-        <div class="container mx-auto px-4 py-16 relative">
+         <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div class="tech-icon" style="top: 15%; left: 10%;">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M12 0l12 4.5-12 4.5-12-4.5zM24 8l-12 4.5-12-4.5v8l12 4.5 12-4.5z"/>
+                 </svg>
+                </div>
+                 <div class="tech-icon" style="top: 25%; right: 5%;">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M12 0l12 4.5-12 4.5-12-4.5zM24 8l-12 4.5-12-4.5v8l12 4.5 12-4.5z"/>
+                        </svg>
+                 </div>
+
+               <div class="tech-icon" style="top: 45%; left: 20%;">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M12 0l12 4.5-12 4.5-12-4.5zM24 8l-12 4.5-12-4.5v8l12 4.5 12-4.5z"/>
+                        </svg>
+                 </div>
+
+
+                 <div class="tech-icon" style="top: 70%; right: 15%;">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                          <path d="M12 0l12 4.5-12 4.5-12-4.5zM24 8l-12 4.5-12-4.5v8l12 4.5 12-4.5z"/>
+                          </svg>
+                 </div>
+
+
+                  <div class="tech-icon" style="bottom: 10%; left: 10%;">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                           <path d="M12 0l12 4.5-12 4.5-12-4.5zM24 8l-12 4.5-12-4.5v8l12 4.5 12-4.5z"/>
+                           </svg>
+                 </div>
+
+
+                  <div class="tech-icon" style="bottom: 20%; right: 20%;">
+                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                           <path d="M12 0l12 4.5-12 4.5-12-4.5zM24 8l-12 4.5-12-4.5v8l12 4.5 12-4.5z"/>
+                            </svg>
+                 </div>
+            </div>
+        <div class="container mx-auto px-4 py-16 relative z-10">
             <!-- Navigation -->
             <nav class="flex justify-between items-center mb-16">
                 <div class="text-2xl font-bold text-white flex items-center">
-                    <span class="text-blue-500">&lt;</span>
+                    <span class="text-blue-500"><</span>
                     ME
-                    <span class="text-blue-500">/&gt;</span>
+                    <span class="text-blue-500">/></span>
                 </div>
                 <div class="hidden md:flex space-x-8">
                     <a href="#expertise" class="nav-link">Technical Expertise</a>
                     <a href="#projects" class="nav-link">Projects</a>
                     <a href="#experience" class="nav-link">Experience</a>
+                     <a href="#certifications" class="nav-link">Certifications</a>
                     <a href="#contact" class="nav-link">Contact</a>
                 </div>
             </nav>
@@ -258,11 +426,11 @@
                         </h1>
                         <div class="space-y-4">
                             <p class="text-xl md:text-2xl text-blue-200">
-                                Embedded Systems & RTOS Specialist
+                                <span class="typed"></span>
                             </p>
                             <p class="text-gray-400 max-w-2xl leading-relaxed">
                                 Focused on developing robust embedded solutions with expertise in real-time operating systems,
-                                microcontroller programming, and automotive systems. Committed to writing efficient, 
+                                microcontroller programming, and automotive systems. Committed to writing efficient,
                                 maintainable, and MISRA-compliant code.
                             </p>
                         </div>
@@ -272,15 +440,15 @@
                     <!-- Technical Metrics -->
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
                         <div class="metric-display p-6 rounded-xl text-center">
-                            <div class="text-3xl font-bold text-blue-400 mb-2" data-count="3.58">3.58</div>
+                            <div class="text-3xl font-bold text-blue-400 mb-2" data-count="3.58"><span class="counter" data-target="3.58">0</span></div>
                             <div class="text-gray-400 text-sm uppercase tracking-wider">CGPA</div>
                         </div>
                         <div class="metric-display p-6 rounded-xl text-center">
-                            <div class="text-3xl font-bold text-blue-400 mb-2" data-count="120">120+</div>
-                            <div class="text-gray-400 text-sm uppercase tracking-wider">Training Hours</div>
+                            <div class="text-3xl font-bold text-blue-400 mb-2" data-count="120"><span class="counter" data-target="120">0</span>+</div>
+                             <div class="text-gray-400 text-sm uppercase tracking-wider">Training Hours</div>
                         </div>
                         <div class="metric-display p-6 rounded-xl text-center">
-                            <div class="text-3xl font-bold text-blue-400 mb-2" data-count="15">15+</div>
+                            <div class="text-3xl font-bold text-blue-400 mb-2" data-count="15"><span class="counter" data-target="15">0</span>+</div>
                             <div class="text-gray-400 text-sm uppercase tracking-wider">Projects</div>
                         </div>
                         <div class="metric-display p-6 rounded-xl text-center">
@@ -290,38 +458,43 @@
                     </div>
 
                     <!-- Code Sample Preview -->
-                    <div class="code-block mb-12 text-sm">
-                        <pre><code class="language-c">
+                   <div class="code-block mb-12 text-sm">
+                    <pre><code class="language-c">
 /* RTOS Task Implementation Example */
 void vSensorTask(void *pvParameters) {
     static sensor_data_t data;
-    
+
     while(1) {
         if(xSemaphoreTake(xI2CMutex, pdMS_TO_TICKS(100))) {
             data = read_sensor_data();
             xSemaphoreGive(xI2CMutex);
-            
+
             xQueueSend(xDataQueue, &data, portMAX_DELAY);
             vTaskDelay(pdMS_TO_TICKS(100));
         }
     }
 }</code></pre>
-                    </div>
+                   </div>
 
                     <!-- Call to Action -->
-                    <div class="flex flex-wrap gap-6">
-                        <a href="#contact" 
-                           class="px-8 py-4 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 
-                                  transition-colors duration-300 flex items-center">
+                     <div class="flex flex-wrap gap-6">
+                        <a href="#contact"
+                            class="px-8 py-4 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700
+                                 transition-colors duration-300 flex items-center glow-component">
                             <span>Let's Collaborate</span>
                             <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                      d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                             </svg>
                         </a>
-                        <a href="#projects" 
-                           class="px-8 py-4 border border-blue-400 text-blue-400 rounded-lg font-medium 
-                                  hover:bg-blue-600/10 transition-colors duration-300">
+                         <a href="#resume"
+                             class="px-8 py-4 border border-blue-400 text-blue-400 rounded-lg font-medium
+                                 hover:bg-blue-600/10 transition-colors duration-300 glow-component">
+                             Download Resume
+                         </a>
+                        <a href="#projects"
+                            class="px-8 py-4 border border-blue-400 text-blue-400 rounded-lg font-medium
+                                 hover:bg-blue-600/10 transition-colors duration-300">
                             View Technical Projects
                         </a>
                     </div>
@@ -334,13 +507,13 @@ void vSensorTask(void *pvParameters) {
     <section id="expertise" class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-4xl font-bold text-center mb-16">Technical Expertise</h2>
-            
+
             <!-- Core Skills -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-6xl mx-auto">
                 <div>
                     <h3 class="text-2xl font-bold mb-8">Core Competencies</h3>
-                    <div class="space-y-8">
-                        <div class="skill-container">
+                     <div class="space-y-8">
+                        <div class="skill-container" data-aos="fade-right">
                             <div class="flex justify-between mb-2">
                                 <span class="font-semibold">Embedded C/C++ Development</span>
                                 <span class="text-blue-600">Advanced</span>
@@ -353,25 +526,25 @@ void vSensorTask(void *pvParameters) {
                             </ul>
                         </div>
 
-                        <div class="skill-container">
+                        <div class="skill-container" data-aos="fade-right" data-aos-delay="100">
                             <div class="flex justify-between mb-2">
                                 <span class="font-semibold">RTOS & System Architecture</span>
                                 <span class="text-blue-600">Advanced</span>
                             </div>
                             <div class="skill-bar" style="--skill-level: 85%" data-level="85%"></div>
-                            <ul class="mt-2 text-sm text-gray-600 space-y-1">
+                             <ul class="mt-2 text-sm text-gray-600 space-y-1">
                                 <li>• FreeRTOS Implementation</li>
                                 <li>• Task Scheduling</li>
                                 <li>• Real-time Constraints</li>
                             </ul>
                         </div>
 
-                        <div class="skill-container">
+                        <div class="skill-container" data-aos="fade-right" data-aos-delay="200">
                             <div class="flex justify-between mb-2">
                                 <span class="font-semibold">Microcontroller Architecture</span>
                                 <span class="text-blue-600">Advanced</span>
                             </div>
-                            <div class="skill-bar" style="--skill-level: 88%" data-level="88%"></div>
+                           <div class="skill-bar" style="--skill-level: 88%" data-level="88%"></div>
                             <ul class="mt-2 text-sm text-gray-600 space-y-1">
                                 <li>• ARM Cortex-M Series</li>
                                 <li>• AVR Architecture</li>
@@ -379,13 +552,13 @@ void vSensorTask(void *pvParameters) {
                             </ul>
                         </div>
 
-                        <div class="skill-container">
+                        <div class="skill-container" data-aos="fade-right" data-aos-delay="300">
                             <div class="flex justify-between mb-2">
                                 <span class="font-semibold">Communication Protocols</span>
                                 <span class="text-blue-600">Advanced</span>
                             </div>
-                            <div class="skill-bar" style="--skill-level: 85%" data-level="85%"></div>
-                            <ul class="mt-2 text-sm text-gray-600 space-y-1">
+                             <div class="skill-bar" style="--skill-level: 85%" data-level="85%"></div>
+                           <ul class="mt-2 text-sm text-gray-600 space-y-1">
                                 <li>• CAN Bus Implementation</li>
                                 <li>• I²C/SPI/UART</li>
                                 <li>• Protocol Stack Development</li>
@@ -398,9 +571,9 @@ void vSensorTask(void *pvParameters) {
                 <div>
                     <h3 class="text-2xl font-bold mb-8">Technical Stack</h3>
                     <div class="grid grid-cols-1 gap-6">
-                        <div class="p-6 bg-gray-50 rounded-xl border border-gray-200">
+                        <div class="p-6 bg-gray-50 rounded-xl border border-gray-200 glassmorphism-card" data-aos="fade-left">
                             <h4 class="font-semibold text-lg mb-4">Development Environment</h4>
-                            <div class="grid grid-cols-2 gap-4">
+                             <div class="grid grid-cols-2 gap-4">
                                 <div class="space-y-2">
                                     <div class="flex items-center">
                                         <div class="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
@@ -432,9 +605,9 @@ void vSensorTask(void *pvParameters) {
                             </div>
                         </div>
 
-                        <div class="p-6 bg-gray-50 rounded-xl border border-gray-200">
+                        <div class="p-6 bg-gray-50 rounded-xl border border-gray-200 glassmorphism-card" data-aos="fade-left" data-aos-delay="100">
                             <h4 class="font-semibold text-lg mb-4">Testing & Debugging</h4>
-                            <div class="grid grid-cols-2 gap-4">
+                             <div class="grid grid-cols-2 gap-4">
                                 <div class="space-y-2">
                                     <div class="flex items-center">
                                         <div class="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
@@ -466,14 +639,14 @@ void vSensorTask(void *pvParameters) {
                             </div>
                         </div>
 
-                        <div class="p-6 bg-gray-50 rounded-xl border border-gray-200">
+                         <div class="p-6 bg-gray-50 rounded-xl border border-gray-200 glassmorphism-card" data-aos="fade-left" data-aos-delay="200">
                             <h4 class="font-semibold text-lg mb-4">Version Control & CI/CD</h4>
                             <div class="flex flex-wrap gap-3">
                                 <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Git</span>
                                 <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Jenkins</span>
                                 <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">JIRA</span>
                                 <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Confluence</span>
-                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Azure DevOps</span>
+                                 <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Azure DevOps</span>
                             </div>
                         </div>
                     </div>
@@ -483,146 +656,279 @@ void vSensorTask(void *pvParameters) {
     </section>
 
     <!-- Featured Projects -->
-    <section id="projects" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center text-white mb-16">Technical Projects</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-                <!-- Project 1: Automotive Gateway -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg project-showcase">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-bold">Automotive Gateway Module</h3>
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Featured</span>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            Multi-protocol gateway supporting CAN, LIN, and Ethernet communication for vehicle diagnostics.
-                        </p>
-                        <div class="space-y-3 mb-6">
-                            <div class="flex items-center text-sm text-gray-600">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                                <span>AUTOSAR-compliant architecture</span>
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                                <span>Real-time message routing</span>
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                                <span>Diagnostic data logging</span>
-                            </div>
-                        </div>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">STM32H7</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">FreeRTOS</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">CAN-FD</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">TCP/IP</span>
-                        </div>
-                    </div>
-                </div>
+     <section id="projects" class="py-20 bg-gray-900 relative overflow-hidden">
+         <div class="container mx-auto px-4">
+             <h2 class="text-4xl font-bold text-center text-white mb-16">Technical Projects</h2>
 
-                <!-- Project 2: RTOS-based Data Logger -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg project-showcase">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-bold">Real-Time Data Logger</h3>
-                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Completed</span>
+             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                 <!-- Project 1: Automotive Gateway -->
+                 <div class="project-showcase" data-aos="fade-up">
+                     <div class="p-6">
+                         <div class="flex items-center justify-between mb-4">
+                             <h3 class="text-xl font-bold text-white">Automotive Gateway Module</h3>
+                             <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Featured</span>
+                         </div>
+                         <p class="text-gray-400 mb-4">
+                             Multi-protocol gateway supporting CAN, LIN, and Ethernet communication for vehicle diagnostics.
+                         </p>
+                         <div class="space-y-3 mb-6">
+                             <div class="flex items-center text-sm text-gray-400">
+                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                 </svg>
+                                 <span>AUTOSAR-compliant architecture</span>
+                             </div>
+                             <div class="flex items-center text-sm text-gray-400">
+                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                 </svg>
+                                 <span>Real-time message routing</span>
+                             </div>
+                             <div class="flex items-center text-sm text-gray-400">
+                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                 </svg>
+                                 <span>Diagnostic data logging</span>
+                             </div>
+                         </div>
+                         <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-gray-700 text-gray-300 rounded-full text-sm">STM32H7</span>
+                            <span class="px-3 py-1 bg-gray-700 text-gray-300 rounded-full text-sm">FreeRTOS</span>
+                            <span class="px-3 py-1 bg-gray-700 text-gray-300 rounded-full text-sm">CAN-FD</span>
+                            <span class="px-3 py-1 bg-gray-700 text-gray-300 rounded-full text-sm">TCP/IP</span>
                         </div>
-                        <p class="text-gray-600 mb-4">
+                         <div class="mt-4">
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="openModal('project1Modal')">
+                                    View Demo
+                                </button>
+                            </div>
+                     </div>
+                 </div>
+
+                 <!-- Project 2: RTOS-based Data Logger -->
+                  <div class="project-showcase" data-aos="fade-up" data-aos-delay="100">
+                     <div class="p-6">
+                         <div class="flex items-center justify-between mb-4">
+                             <h3 class="text-xl font-bold text-white">Real-Time Data Logger</h3>
+                             <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Completed</span>
+                         </div>
+                         <p class="text-gray-400 mb-4">
                             High-precision data acquisition system for industrial sensor monitoring with strict timing requirements.
-                        </p>
-                        <div class="space-y-3 mb-6">
-                            <div class="flex items-center text-sm text-gray-600">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                                <span>1ms sampling precision</span>
+                         </p>
+                         <div class="space-y-3 mb-6">
+                            <div class="flex items-center text-sm text-gray-400">
+                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                 </svg>
+                                 <span>1ms sampling precision</span>
                             </div>
-                            <div class="flex items-center text-sm text-gray-600">
+                             <div class="flex items-center text-sm text-gray-400">
+                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                 </svg>
+                                 <span>Multi-sensor fusion</span>
+                             </div>
+                             <div class="flex items-center text-sm text-gray-400">
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                 </svg>
-                                <span>Multi-sensor fusion</span>
+                                 <span>SD card storage optimization</span>
+                             </div>
+                         </div>
+                         <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-gray-700 text-gray-300 rounded-full text-sm">ARM Cortex-M4</span>
+                            <span class="px-3 py-1 bg-gray-700 text-gray-300 rounded-full text-sm">µC/OS-III</span>
+                             <span class="px-3 py-1 bg-gray-700 text-gray-300 rounded-full text-sm">FATFS</span>
+                             <span class="px-3 py-1 bg-gray-700 text-gray-300 rounded-full text-sm">DMA</span>
+                         </div>
+                         <div class="mt-4">
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="openModal('project2Modal')">
+                                    View Demo
+                                </button>
                             </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                                <span>SD card storage optimization</span>
-                            </div>
-                        </div>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">ARM Cortex-M4</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">µC/OS-III</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">FATFS</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">DMA</span>
-                        </div>
-                    </div>
-                </div>
+                     </div>
+                 </div>
 
-                <!-- Project 3: Smart Home System -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg project-showcase">
+                 <!-- Project 3: Smart Home System -->
+                  <div class="project-showcase" data-aos="fade-up" data-aos-delay="200">
                     <div class="p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-bold">Smart Home System</h3>
+                         <div class="flex items-center justify-between mb-4">
+                             <h3 class="text-xl font-bold text-white">Smart Home System</h3>
                             <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Featured</span>
-                        </div>
-                        <p class="text-gray-600 mb-4">
+                         </div>
+                         <p class="text-gray-400 mb-4">
                             IoT-enabled home automation system with real-time monitoring and control capabilities.
-                        </p>
-                        <div class="space-y-3 mb-6">
-                            <div class="flex items-center text-sm text-gray-600">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                         </p>
+                         <div class="space-y-3 mb-6">
+                             <div class="flex items-center text-sm text-gray-400">
+                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                 </svg>
                                 <span>Wireless sensor network</span>
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                             </div>
+                             <div class="flex items-center text-sm text-gray-400">
+                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                 </svg>
-                                <span>Cloud integration</span>
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
+                                 <span>Cloud integration</span>
+                             </div>
+                             <div class="flex items-center text-sm text-gray-400">
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                 </svg>
                                 <span>Mobile app control</span>
                             </div>
+                         </div>
+                         <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-gray-700 text-gray-300 rounded-full text-sm">ESP32</span>
+                            <span class="px-3 py-1 bg-gray-700 text-gray-300 rounded-full text-sm">MQTT</span>
+                            <span class="px-3 py-1 bg-gray-700 text-gray-300 rounded-full text-sm">Firebase</span>
+                            <span class="px-3 py-1 bg-gray-700 text-gray-300 rounded-full text-sm">React Native</span>
                         </div>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">ESP32</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">MQTT</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">Firebase</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">React Native</span>
-                        </div>
-                    </div>
+                           <div class="mt-4">
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="openModal('project3Modal')">
+                                    View Demo
+                                </button>
+                            </div>
+                     </div>
                 </div>
+             </div>
+         </div>
+           <div id="project1Modal" class="modal-overlay">
+                <div class="modal">
+                    <span class="modal-close" onclick="closeModal('project1Modal')">×</span>
+                       <div class="system-diagram p-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="700" height="400" viewBox="0 0 700 400">
+                            <!-- Base Rectangle -->
+                             <rect x="50" y="50" width="600" height="300" style="fill:rgba(255, 255, 255, 0.05);stroke:#2563eb;stroke-width:1"/>
+                             <!-- Gateway Module -->
+                             <rect x="100" y="100" width="120" height="150" style="fill:rgba(255, 255, 255, 0.05);stroke:#2563eb;stroke-width:1"/>
+                             <text x="160" y="130" text-anchor="middle" style="font-size: 14px; fill: #2563eb;">Gateway</text>
+                             <text x="160" y="150" text-anchor="middle" style="font-size: 12px; fill: #2563eb;">Module</text>
+                            <!-- CAN Bus -->
+                            <rect x="250" y="100" width="120" height="50" style="fill:rgba(255, 255, 255, 0.05);stroke:#2563eb;stroke-width:1"/>
+                            <text x="310" y="125" text-anchor="middle" style="font-size: 14px; fill: #2563eb;">CAN Bus</text>
+                             <!-- LIN Bus -->
+                            <rect x="250" y="200" width="120" height="50" style="fill:rgba(255, 255, 255, 0.05);stroke:#2563eb;stroke-width:1"/>
+                            <text x="310" y="225" text-anchor="middle" style="font-size: 14px; fill: #2563eb;">LIN Bus</text>
+                            <!-- Ethernet -->
+                            <rect x="450" y="100" width="120" height="50" style="fill:rgba(255, 255, 255, 0.05);stroke:#2563eb;stroke-width:1"/>
+                           <text x="510" y="125" text-anchor="middle" style="font-size: 14px; fill: #2563eb;">Ethernet</text>
+                            <!-- Microcontroller -->
+                           <rect x="450" y="200" width="120" height="50" style="fill:rgba(255, 255, 255, 0.05);stroke:#2563eb;stroke-width:1"/>
+                            <text x="510" y="225" text-anchor="middle" style="font-size: 14px; fill: #2563eb;">MCU</text>
+                                 <!-- Connections -->
+                           <line x="220" y="125" x2="250" y2="125" style="stroke:#2563eb;stroke-width:1;"/>
+                           <line x="220" y="225" x2="250" y2="225" style="stroke:#2563eb;stroke-width:1;"/>
+                           <line x="220" y="225" x2="250" y2="225" style="stroke:#2563eb;stroke-width:1;"/>
+                             <line x="570" y="125" x2="450" y2="125" style="stroke:#2563eb;stroke-width:1;"/>
+                             <line x="570" y="225" x2="450" y2="225" style="stroke:#2563eb;stroke-width:1;"/>
+                        </svg>
+                    </div>
+                     <div class="text-center mt-4">
+                          <video width="100%" controls>
+                              <source src="https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4">
+                              Your browser does not support the video tag.
+                         </video>
+                     </div>
+                 </div>
             </div>
-        </div>
+             <div id="project2Modal" class="modal-overlay">
+                <div class="modal">
+                    <span class="modal-close" onclick="closeModal('project2Modal')">×</span>
+                     <div class="system-diagram p-6">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="700" height="400" viewBox="0 0 700 400">
+                            <!-- Base Rectangle -->
+                              <rect x="50" y="50" width="600" height="300" style="fill:rgba(255, 255, 255, 0.05);stroke:#2563eb;stroke-width:1"/>
+                              <!-- Sensor Array -->
+                              <rect x="100" y="100" width="120" height="150" style="fill:rgba(255, 255, 255, 0.05);stroke:#2563eb;stroke-width:1"/>
+                              <text x="160" y="130" text-anchor="middle" style="font-size: 14px; fill: #2563eb;">Sensor</text>
+                              <text x="160" y="150" text-anchor="middle" style="font-size: 12px; fill: #2563eb;">Array</text>
+                              <!-- Signal Conditioning -->
+                               <rect x="250" y="150" width="120" height="50" style="fill:rgba(255, 255, 255, 0.05);stroke:#2563eb;stroke-width:1"/>
+                              <text x="310" y="175" text-anchor="middle" style="font-size: 14px; fill: #2563eb;">Signal</text>
+                              <text x="310" y="195" text-anchor="middle" style="font-size: 12px; fill: #2563eb;">Conditioning</text>
+                             <!-- Microcontroller -->
+                               <rect x="450" y="100" width="120" height="150" style="fill:rgba(255, 255, 255, 0.05);stroke:#2563eb;stroke-width:1"/>
+                                <text x="510" y="130" text-anchor="middle" style="font-size: 14px; fill: #2563eb;">Micro</text>
+                                  <text x="510" y="150" text-anchor="middle" style="font-size: 12px; fill: #2563eb;">controller</text>
+                             <!-- SD Card -->
+                                 <rect x="450" y="270" width="120" height="50" style="fill:rgba(255, 255, 255, 0.05);stroke:#2563eb;stroke-width:1"/>
+                                  <text x="510" y="295" text-anchor="middle" style="font-size: 14px; fill: #2563eb;">SD Card</text>
+
+                            <!-- Connections -->
+                                 <line x="220" y="175" x2="250" y2="175" style="stroke:#2563eb;stroke-width:1;"/>
+                             <line x="370" y="175" x2="450" y2="175" style="stroke:#2563eb;stroke-width:1;"/>
+                             <line x="570" y="295" x2="450" y2="295" style="stroke:#2563eb;stroke-width:1;"/>
+                        </svg>
+                     </div>
+                       <div class="text-center mt-4">
+                          <video width="100%" controls>
+                              <source src="https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4">
+                              Your browser does not support the video tag.
+                         </video>
+                     </div>
+                 </div>
+             </div>
+           <div id="project3Modal" class="modal-overlay">
+                <div class="modal">
+                    <span class="modal-close" onclick="closeModal('project3Modal')">×</span>
+                       <div class="system-diagram p-6">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="700" height="400" viewBox="0 0 700 400">
+                               <!-- Base Rectangle -->
+                                <rect x="50" y="50" width="600" height="300" style="fill:rgba(255, 255, 255, 0.05);stroke:#2563eb;stroke-width:1"/>
+                               <!-- Sensor Node 1 -->
+                              <rect x="100" y="100" width="120" height="80" style="fill:rgba(255, 255, 255, 0.05);stroke:#2563eb;stroke-width:1"/>
+                                  <text x="160" y="130" text-anchor="middle" style="font-size: 14px; fill: #2563eb;">Sensor</text>
+                                   <text x="160" y="150" text-anchor="middle" style="font-size: 12px; fill: #2563eb;">Node 1</text>
+                             <!-- Sensor Node 2 -->
+                               <rect x="100" y="220" width="120" height="80" style="fill:rgba(255, 255, 255, 0.05);stroke:#2563eb;stroke-width:1"/>
+                                <text x="160" y="250" text-anchor="middle" style="font-size: 14px; fill: #2563eb;">Sensor</text>
+                                  <text x="160" y="270" text-anchor="middle" style="font-size: 12px; fill: #2563eb;">Node 2</text>
+
+                               <!-- Gateway Device -->
+                             <rect x="300" y="100" width="120" height="150" style="fill:rgba(255, 255, 255, 0.05);stroke:#2563eb;stroke-width:1"/>
+                             <text x="360" y="130" text-anchor="middle" style="font-size: 14px; fill: #2563eb;">Gateway</text>
+                            <text x="360" y="150" text-anchor="middle" style="font-size: 12px; fill: #2563eb;">Device</text>
+                            <!-- Cloud Server -->
+                             <rect x="500" y="100" width="120" height="150" style="fill:rgba(255, 255, 255, 0.05);stroke:#2563eb;stroke-width:1"/>
+                            <text x="560" y="130" text-anchor="middle" style="font-size: 14px; fill: #2563eb;">Cloud</text>
+                           <text x="560" y="150" text-anchor="middle" style="font-size: 12px; fill: #2563eb;">Server</text>
+                             <!-- Mobile App -->
+                                <rect x="500" y="270" width="120" height="50" style="fill:rgba(255, 255, 255, 0.05);stroke:#2563eb;stroke-width:1"/>
+                                  <text x="560" y="295" text-anchor="middle" style="font-size: 14px; fill: #2563eb;">Mobile App</text>
+                           <!-- Connections -->
+                                 <line x="220" y="140" x2="300" y2="140" style="stroke:#2563eb;stroke-width:1;"/>
+                                <line x="220" y="260" x2="300" y2="260" style="stroke:#2563eb;stroke-width:1;"/>
+                                 <line x="420" y="175" x2="500" y2="175" style="stroke:#2563eb;stroke-width:1;"/>
+                                <line x="620" y="295" x2="500" y2="295" style="stroke:#2563eb;stroke-width:1;"/>
+                          </svg>
+                     </div>
+                     <div class="text-center mt-4">
+                          <video width="100%" controls>
+                              <source src="https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4">
+                              Your browser does not support the video tag.
+                         </video>
+                     </div>
+                 </div>
+            </div>
     </section>
 
-    <!-- Education Section -->
+     <!-- Education Section -->
     <section class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-4xl font-bold text-center mb-16">Education</h2>
             <div class="max-w-4xl mx-auto space-y-8">
-                <div class="education-card pl-6 py-6" data-aos="fade-left">
+                 <div class="education-card pl-6 py-6 glassmorphism-card" data-aos="fade-left">
                     <h3 class="text-2xl font-bold">Bachelor of Science in Computer Engineering</h3>
                     <p class="text-blue-600 mb-2">Menoufia University, Faculty of Electronic Engineering • Expected July 2026</p>
                     <ul class="space-y-2 text-gray-600">
@@ -632,7 +938,7 @@ void vSensorTask(void *pvParameters) {
                     </ul>
                 </div>
 
-                <div class="education-card pl-6 py-6" data-aos="fade-left" data-aos-delay="100">
+                 <div class="education-card pl-6 py-6 glassmorphism-card" data-aos="fade-left" data-aos-delay="100">
                     <h3 class="text-2xl font-bold">Embedded Systems Diploma</h3>
                     <p class="text-blue-600 mb-2">Information Technology Institute (ITI) • Jul 2023 - Sep 2023</p>
                     <ul class="space-y-2 text-gray-600">
@@ -651,7 +957,7 @@ void vSensorTask(void *pvParameters) {
             <h2 class="text-4xl font-bold text-center mb-16">Experience</h2>
             <div class="max-w-5xl mx-auto">
                 <div class="timeline">
-                    <div class="timeline-item">
+                    <div class="timeline-item" data-aos="fade-right">
                         <h3 class="text-2xl font-bold">Embedded Software Engineer Intern</h3>
                         <p class="text-blue-600 mb-2">Nissan Motors Egypt • Jan 2024 - Present</p>
                         <ul class="space-y-2 text-gray-600">
@@ -661,7 +967,7 @@ void vSensorTask(void *pvParameters) {
                         </ul>
                     </div>
 
-                    <div class="timeline-item">
+                    <div class="timeline-item" data-aos="fade-right" data-aos-delay="100">
                         <h3 class="text-2xl font-bold">Research Assistant</h3>
                         <p class="text-blue-600 mb-2">Menoufia University • Sep 2023 - Dec 2023</p>
                         <ul class="space-y-2 text-gray-600">
@@ -675,17 +981,17 @@ void vSensorTask(void *pvParameters) {
     </section>
 
     <!-- Certifications Section -->
-    <section class="py-20 bg-white">
+      <section id="certifications" class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-4xl font-bold text-center mb-16">Certifications</h2>
             <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="cert-card p-6">
+                 <div class="cert-card p-6" data-aos="fade-up">
                     <h3 class="text-2xl font-bold mb-4">Certified Embedded Systems Engineer</h3>
                     <p class="text-blue-600 mb-2">Embedded Systems Institute • Jan 2024</p>
                     <p class="text-gray-600">Advanced certification in embedded systems development and real-time operating systems.</p>
                 </div>
 
-                <div class="cert-card p-6">
+                <div class="cert-card p-6" data-aos="fade-up" data-aos-delay="100">
                     <h3 class="text-2xl font-bold mb-4">AUTOSAR Foundation Certificate</h3>
                     <p class="text-blue-600 mb-2">AUTOSAR Partner University • Mar 2024</p>
                     <p class="text-gray-600">Proficiency in AUTOSAR architecture and automotive software development.</p>
@@ -694,24 +1000,24 @@ void vSensorTask(void *pvParameters) {
         </div>
     </section>
 
-    <!-- Contact Section -->
+     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-blue-900 text-white">
         <div class="container mx-auto px-4">
             <div class="max-w-3xl mx-auto text-center">
                 <h2 class="text-4xl font-bold mb-8">Let's Connect</h2>
                 <p class="text-xl text-blue-200 mb-12">Looking for internship opportunities in embedded systems!</p>
-                
+
                 <form action="https://formspree.io/f/your-form-id" method="POST" class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <input type="text" name="name" placeholder="Your Name" required
-                            class="w-full px-4 py-3 rounded-lg bg-blue-800 border border-blue-700 text-white placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            class="w-full px-4 py-3 rounded-lg bg-blue-800 border border-blue-700 text-white placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 contact-input">
                         <input type="email" name="email" placeholder="Your Email" required
-                            class="w-full px-4 py-3 rounded-lg bg-blue-800 border border-blue-700 text-white placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            class="w-full px-4 py-3 rounded-lg bg-blue-800 border border-blue-700 text-white placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 contact-input">
                     </div>
                     <input type="text" name="subject" placeholder="Subject" required
-                        class="w-full px-4 py-3 rounded-lg bg-blue-800 border border-blue-700 text-white placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        class="w-full px-4 py-3 rounded-lg bg-blue-800 border border-blue-700 text-white placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 contact-input">
                     <textarea name="message" rows="5" placeholder="Your Message" required
-                        class="w-full px-4 py-3 rounded-lg bg-blue-800 border border-blue-700 text-white placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        class="w-full px-4 py-3 rounded-lg bg-blue-800 border border-blue-700 text-white placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 contact-input"></textarea>
                     <button type="submit"
                         class="bg-white text-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition duration-300">
                         Send Message
@@ -729,12 +1035,301 @@ void vSensorTask(void *pvParameters) {
                         class="text-blue-300 hover:text-white transition">
                         <span class="sr-only">GitHub</span>
                         <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                            <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931  -1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
                         </svg>
                     </a>
                 </div>
             </div>
         </div>
     </section>
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index:-1">
+     <canvas id="circuitCanvas"></canvas>
+</div>
+<div id="resume" style="display:none;">
+    <!-- Resume Content -->
+   <div class="flex justify-center items-center min-h-screen bg-white">
+            <div class="bg-gray-100 p-8 rounded-lg shadow-md max-w-4xl w-full">
+                <h1 class="text-3xl font-bold text-center mb-6 text-gray-800">Mahmoud Ezzat</h1>
+                  <p class="text-xl text-center mb-4 text-gray-700">Embedded Systems & RTOS Engineer</p>
+                <!-- Contact Information -->
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold mb-2 text-gray-700">Contact Information</h2>
+                     <div class="grid grid-cols-2 gap-4">
+                        <div>
+                             <p class="text-gray-600"><span class="font-semibold">Email:</span> mahmoud.ezzat.m@gmail.com</p>
+                             <p class="text-gray-600"><span class="font-semibold">Phone:</span> +20 1010728452</p>
+                            <p class="text-gray-600"><span class="font-semibold">LinkedIn:</span> <a href="https://linkedin.com/in/mahmoudezzat" target="_blank" class="text-blue-500">linkedin.com/in/mahmoudezzat</a></p>
+                             <p class="text-gray-600"><span class="font-semibold">GitHub:</span> <a href="https://github.com/mahmoudezzat" target="_blank" class="text-blue-500">github.com/mahmoudezzat</a></p>
+                           </div>
+                        </div>
+
+                 </div>
+
+
+                  <div class="mb-6">
+                     <h2 class="text-xl font-semibold mb-2 text-gray-700">Summary</h2>
+                     <p class="text-gray-600">
+                        Highly motivated and detail-oriented embedded systems engineer with a strong foundation in real-time operating systems,
+                         microcontroller programming, and automotive systems. Passionate about developing efficient, maintainable, and MISRA-compliant code.
+                        Seeking an internship opportunity to apply my knowledge and contribute to innovative projects.
+                     </p>
+                 </div>
+                 <!-- Education -->
+                <div class="mb-6">
+                     <h2 class="text-xl font-semibold mb-2 text-gray-700">Education</h2>
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-700">Bachelor of Science in Computer Engineering</h3>
+                        <p class="text-gray-600">Menoufia University, Faculty of Electronic Engineering</p>
+                        <p class="text-gray-600">Expected July 2026</p>
+                       </div>
+                    <div class="mb-4">
+                         <h3 class="text-lg font-semibold text-gray-700">Embedded Systems Diploma</h3>
+                         <p class="text-gray-600">Information Technology Institute (ITI)</p>
+                         <p class="text-gray-600">Jul 2023 - Sep 2023</p>
+                       </div>
+
+                 </div>
+                 <!-- Experience -->
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold mb-2 text-gray-700">Experience</h2>
+                    <div class="mb-4">
+                         <h3 class="text-lg font-semibold text-gray-700">Embedded Software Engineer Intern</h3>
+                         <p class="text-gray-600">Nissan Motors Egypt</p>
+                         <p class="text-gray-600">Jan 2024 - Present</p>
+                         <ul class="list-disc list-inside text-gray-600">
+                             <li>Developed firmware for automotive ECUs</li>
+                            <li>Implemented real-time communication protocols</li>
+                           <li>Collaborated with cross-functional teams</li>
+                       </ul>
+                   </div>
+                    <div class="mb-4">
+                         <h3 class="text-lg font-semibold text-gray-700">Research Assistant</h3>
+                        <p class="text-gray-600">Menoufia University</p>
+                       <p class="text-gray-600">Sep 2023 - Dec 2023</p>
+                      <ul class="list-disc list-inside text-gray-600">
+                         <li>Conducted research on IoT-based home automation</li>
+                        <li>Prototyped and tested embedded systems</li>
+                    </ul>
+                  </div>
+             </div>
+                <div class="mb-6">
+                      <h2 class="text-xl font-semibold mb-2 text-gray-700">Technical Skills</h2>
+                      <div class="grid grid-cols-2 gap-4">
+                          <div>
+                           <h3 class="text-md font-semibold text-gray-700">Programming Languages</h3>
+                            <ul class="list-disc list-inside text-gray-600">
+                             <li>C/C++</li>
+                           </ul>
+                         </div>
+                          <div>
+                             <h3 class="text-md font-semibold text-gray-700">RTOS</h3>
+                            <ul class="list-disc list-inside text-gray-600">
+                             <li>FreeRTOS</li>
+                              <li>µC/OS-III</li>
+                         </ul>
+                      </div>
+                       <div>
+                         <h3 class="text-md font-semibold text-gray-700">Microcontrollers</h3>
+                           <ul class="list-disc list-inside text-gray-600">
+                               <li>ARM Cortex-M Series</li>
+                                <li>AVR Architecture</li>
+                           </ul>
+                      </div>
+                       <div>
+                            <h3 class="text-md font-semibold text-gray-700">Communication Protocols</h3>
+                            <ul class="list-disc list-inside text-gray-600">
+                                <li>CAN Bus</li>
+                                 <li>I²C/SPI/UART</li>
+                            </ul>
+                       </div>
+                          <div>
+                            <h3 class="text-md font-semibold text-gray-700">Development Tools</h3>
+                            <ul class="list-disc list-inside text-gray-600">
+                                 <li>Keil MDK-ARM</li>
+                                 <li>IAR Embedded Workbench</li>
+                                <li>STM32CubeIDE</li>
+                              </ul>
+                        </div>
+                       <div>
+                             <h3 class="text-md font-semibold text-gray-700">Testing & Debugging</h3>
+                              <ul class="list-disc list-inside text-gray-600">
+                                  <li>JTAG/SWD Debugging</li>
+                                 <li>Logic Analyzers</li>
+                                   <li>Oscilloscopes</li>
+                                </ul>
+                        </div>
+                     </div>
+                </div>
+
+                 <div class="mb-6">
+                    <h2 class="text-xl font-semibold mb-2 text-gray-700">Certifications</h2>
+                    <ul class="list-disc list-inside text-gray-600">
+                        <li>Certified Embedded Systems Engineer - Embedded Systems Institute, Jan 2024</li>
+                         <li>AUTOSAR Foundation Certificate - AUTOSAR Partner University, Mar 2024</li>
+                     </ul>
+                 </div>
+                 <div class="mb-6">
+                    <h2 class="text-xl font-semibold mb-2 text-gray-700">Projects</h2>
+                    <ul class="list-disc list-inside text-gray-600">
+                       <li>Automotive Gateway Module: Multi-protocol gateway with CAN, LIN, and Ethernet communication.</li>
+                        <li>Real-Time Data Logger: High-precision data acquisition system for industrial sensor monitoring.</li>
+                       <li>Smart Home System: IoT-enabled home automation with real-time monitoring and control.</li>
+                    </ul>
+               </div>
+             <div class="text-center mt-8">
+                    <button  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                       Download PDF
+                    </button>
+                 </div>
+           </div>
+      </div>
+</div>
+<!-- CDN Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-c.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
+<script>
+    AOS.init({
+        duration: 800,
+        once: true
+    });
+      function updateCursor(x, y) {
+            const cursor = document.querySelector('.custom-cursor');
+            cursor.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+
+    document.addEventListener('mousemove', (e) => {
+        updateCursor(e.clientX, e.clientY);
+       });
+        document.querySelectorAll('button, a, .nav-link, .project-showcase').forEach(item => {
+           item.addEventListener('mouseenter', () => {
+                  const cursor = document.querySelector('.custom-cursor');
+                cursor.classList.add('custom-cursor-grow')
+           });
+            item.addEventListener('mouseleave', () => {
+                  const cursor = document.querySelector('.custom-cursor');
+               cursor.classList.remove('custom-cursor-grow')
+            });
+      });
+
+        document.addEventListener('DOMContentLoaded', () => {
+           const resumeButton = document.querySelector('a[href="#resume"]');
+               resumeButton.addEventListener('click', function(event) {
+                event.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+               const resumeDiv = document.getElementById('resume');
+                   resumeDiv.style.display = 'block'
+                setTimeout(() => {
+                       resumeDiv.scrollIntoView({ behavior: 'smooth' });
+                   }, 100);
+                 });
+
+
+             const counters = document.querySelectorAll('.counter');
+                  counters.forEach(counter => {
+                    const target = parseFloat(counter.getAttribute('data-target'));
+                       const duration = 1000; // 2 seconds
+                    const start = 0;
+                       const increment = (target - start) / (duration / 16);
+                         let current = start;
+                          const updateCounter = () => {
+                              if (current < target) {
+                                  current += increment;
+                                  counter.textContent = current.toFixed(2).toString();
+                                  requestAnimationFrame(updateCounter);
+                              } else {
+                                  counter.textContent = target.toString() + (target > 10 ? '+' : '');
+                             }
+                        };
+                        updateCounter();
+                  });
+              const typed = new Typed('.typed', {
+                strings: ['Embedded Systems Engineer', 'RTOS Specialist', 'Automotive Systems Enthusiast'],
+                  typeSpeed: 50,
+                  backSpeed: 25,
+                 loop: true,
+                  showCursor: true,
+                  cursorChar: '|',
+            });
+              Prism.highlightAll();
+           });
+        function openModal(modalId) {
+               const modal = document.getElementById(modalId);
+                 modal.style.display = "flex";
+        }
+
+    function closeModal(modalId) {
+              const modal = document.getElementById(modalId);
+              modal.style.display = "none";
+        }
+
+   function createCircuitBoard(canvas) {
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, canvas.offsetWidth / canvas.offsetHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+        renderer.setClearColor(0x000000, 0);
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+         const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+        directionalLight.position.set(5, 5, 5);
+        scene.add(directionalLight);
+
+        const boardGeometry = new THREE.BoxGeometry(15, 0.5, 10);
+        const boardMaterial = new THREE.MeshStandardMaterial({ color: 0x223852, roughness: 0.6, metalness: 0.4 });
+         const board = new THREE.Mesh(boardGeometry, boardMaterial);
+         scene.add(board);
+
+        const components = [];
+        const componentCount = 20;
+
+        for (let i = 0; i < componentCount; i++) {
+             const compGeometry = new THREE.BoxGeometry(0.4, 0.3, 0.4);
+             const compMaterial = new THREE.MeshStandardMaterial({ color: 0x3691d8, roughness: 0.4, metalness: 0.8 });
+           const component = new THREE.Mesh(compGeometry, compMaterial);
+            component.position.x = (Math.random() - 0.5) * 12;
+           component.position.y = 0.3;
+            component.position.z = (Math.random() - 0.5) * 8;
+            components.push(component);
+           scene.add(component);
+        }
+        const lines = [];
+         for (let i = 0; i < componentCount; i++) {
+            const lineMaterial = new THREE.LineBasicMaterial({ color: 0x2563eb, transparent: true, opacity: 0.2,linewidth:2 });
+            const lineGeometry = new THREE.BufferGeometry().setFromPoints([
+                new THREE.Vector3(components[i].position.x ,0.3 , components[i].position.z),
+                new THREE.Vector3((Math.random() - 0.5) * 12 , 0.3,(Math.random() - 0.5) * 8),
+            ]);
+              const line = new THREE.Line(lineGeometry, lineMaterial);
+             lines.push(line);
+             scene.add(line);
+          }
+         camera.position.set(0, 8, 15);
+         camera.lookAt(scene.position);
+
+        const animate = () => {
+             requestAnimationFrame(animate);
+                board.rotation.y += 0.002;
+                  for (let i = 0; i < componentCount; i++) {
+                      components[i].rotation.y += 0.003;
+                      lines[i].geometry.attributes.position.array[0] = components[i].position.x;
+                      lines[i].geometry.attributes.position.array[2] = components[i].position.z;
+                    lines[i].geometry.attributes.position.needsUpdate = true;
+                 }
+            renderer.render(scene, camera);
+         };
+         animate();
+    }
+
+   document.addEventListener('DOMContentLoaded', function () {
+        const canvas = document.getElementById('circuitCanvas');
+        createCircuitBoard(canvas);
+      });
+</script>
 </body>
 </html>
