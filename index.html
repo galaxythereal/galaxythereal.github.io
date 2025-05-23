@@ -152,14 +152,14 @@
               transition: width 0.5s ease;
         }
 
-        .skill-bar::after {
+/*         .skill-bar::after {
             content: attr(data-level);
             position: absolute;
             right: 0;
             top: -25px;
             font-size: 0.875rem;
             color: #2563eb;
-        }
+        } */
 
 
         /* Code Section Styling */
@@ -575,7 +575,7 @@ void taskHandler(void *params) {
                                 <span class="font-semibold">Embedded C/C++ Development</span>
                                 <span class="text-blue-600">Advanced</span>
                             </div>
-                            <div class="skill-bar" ></div>
+                            <div class="skill-bar" style="--skill-level: 90%" data-level="90%"></div>
                             <ul class="mt-2 text-sm text-gray-600 space-y-1">
                                 <li>• MISRA-C Compliance</li>
                                 <li>• Bare-metal Programming</li>
@@ -588,7 +588,7 @@ void taskHandler(void *params) {
                                 <span class="font-semibold">RTOS & System Architecture</span>
                                 <span class="text-blue-600">Advanced</span>
                             </div>
-                            <div class="skill-bar" ></div>
+                            <div class="skill-bar" style="--skill-level: 85%" data-level="85%"></div>
                              <ul class="mt-2 text-sm text-gray-600 space-y-1">
                                 <li>• FreeRTOS Implementation</li>
                                 <li>• Task Scheduling</li>
@@ -601,7 +601,7 @@ void taskHandler(void *params) {
                                 <span class="font-semibold">Microcontroller Architecture</span>
                                 <span class="text-blue-600">Advanced</span>
                             </div>
-                           <div class="skill-bar" ></div>
+                           <div class="skill-bar" style="--skill-level: 88%" data-level="88%"></div>
                             <ul class="mt-2 text-sm text-gray-600 space-y-1">
                                 <li>• ARM Cortex-M Series</li>
                                 <li>• AVR Architecture</li>
@@ -614,7 +614,7 @@ void taskHandler(void *params) {
                                 <span class="font-semibold">Communication Protocols</span>
                                 <span class="text-blue-600">Advanced</span>
                             </div>
-                             <div class="skill-bar"" data-level="85%"></div>
+                             <div class="skill-bar" style="--skill-level: 85%" data-level="85%"></div>
                            <ul class="mt-2 text-sm text-gray-600 space-y-1">
                                 <li>• CAN Bus Implementation</li>
                                 <li>• I²C/SPI/UART</li>
